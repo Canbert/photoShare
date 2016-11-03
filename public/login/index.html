@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Metadata about the webpage-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--Tab Name-->
+    <title>photoShare | Login</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../login/css/login.css">
+
+</head>
+<body>
+
+<!--    NAVBAR HERE-->
+
+    <div class="row">
+        <div class="medium-6 medium-centered large-4 large-centered columns">
+            <form  method="POST" action="php/login.php">
+                <div class="row column contentBox">
+                    <h3 class="text-center">Log In</h3>
+                    <label>Username
+                        <input id="username" type="text" name="username" placeholder="Username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>" autofocus autocomplete="off">
+                    </label>
+                    <label>Password
+                        <input id="password" type="password" name="password" placeholder="Password">
+                    </label>
+                    <div id="feedback"></div>
+                    <input type="submit" class="button expanded" value="Log In"/>
+                    <!--					<p class="text-center"><a href="#">Forgot your password?</a></p>-->
+                </div>
+            </form>
+        </div>
+    </div>
+
+<!--    <script src="js/app.js"></script>-->
+</body>
+</html>
