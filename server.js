@@ -16,7 +16,7 @@ var methodOverride = require('method-override'); // simulate DELETE and PUT (exp
 var database = require('./config/database');
 mongoose.connect(database.url);
 
-// require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
