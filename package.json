@@ -14,9 +14,6 @@
 
     "passport": "*",
     "passport-local":"*",
-    "passport-facebook" : "*",
-    "passport-twitter" : "*",
-    "passport-google-oauth" : "*",
     "connect-flash" : "*",
     "bcrypt-nodejs" : "*",
     "cookie-parser": "*",
