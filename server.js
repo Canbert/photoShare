@@ -11,6 +11,9 @@ var methodOverride = require('method-override'); // simulate DELETE and PUT (exp
 var database = require('./config/database');
 mongoose.connect(database.url);
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
