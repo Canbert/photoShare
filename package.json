@@ -10,6 +10,12 @@
     "method-override": "^2.1.3",
     "mongoose" : "^4.4.12",
     "morgan" : "^1.1.1",
-    "express": "^4.6.1"
+
+    "passport": "*",
+    "passport-local":"*",
+    "connect-flash" : "*",
+    "bcrypt-nodejs" : "*",
+    "cookie-parser": "*",
+    "express-session": "*"
   }
 }
