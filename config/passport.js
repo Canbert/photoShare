@@ -53,13 +53,23 @@ module.exports = function(passport) {
                     // check to see if theres already a user with that email
                     if (user) {
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                    } else {
+
+                    }
+                    else if(req.body.password.length < 8){
+                        return done(null, false, req.flash('signupMessage', 'Password must be more than 8 characters long.'));
+                    }
+                    else if(!(req.body.password == req.body.repassword)){
+                        return done(null, false, req.flash('signupMessage', 'Passwords are not the same.'));
+                    }
+                    else {
 
                         // if there is no user with that email
                         // create the user
                         var newUser            = new User();
 
                         // set the user's local credentials
+                        // console.log(req);
+                        newUser.local.username = req.body.username;
                         newUser.local.email    = email;
                         newUser.local.password = newUser.generateHash(password);
 
