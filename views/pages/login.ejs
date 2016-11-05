@@ -20,16 +20,26 @@
 
     <div class="row">
         <div class="medium-6 medium-centered large-4 large-centered columns">
-            <form  method="POST" action="">
+            <form  method="POST" action="/login">
                 <div class="row column contentBox">
                     <h3 class="text-center">Log In</h3>
-                    <label>Username
-                        <input id="username" type="text" name="username" placeholder="Username" autofocus autocomplete="off">
+
+                    <!-- show any messages that come back with authentication -->
+                    <% if (message.length > 0) { %>
+                    <div class="alert callout" data-closable>
+                        <p class="text-center"><%= message %></p>
+                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <% } %>
+
+                    <label>Email
+                        <input type="email" name="email" placeholder="name@email.com" autofocus>
                     </label>
                     <label>Password
-                        <input id="password" type="password" name="password" placeholder="Password">
+                        <input type="password" name="password" placeholder="Password">
                     </label>
-                    <div id="feedback"></div>
                     <input type="submit" class="button expanded" value="Log In"/>
                     <p class="text-center"><a href="#">Forgot your password?</a></p>
                 </div>

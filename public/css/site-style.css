@@ -3,6 +3,11 @@ body {
     /*margin-top: 2rem; */
 }
 
+.site-title{
+    padding: 0 !important;
+    margin: 0;
+}
+
 .title-bar {
     background: #333;
     padding: 0.9rem; }
@@ -15,6 +20,10 @@ body {
     background: #333; }
 .top-bar ul li a {
     color: #fff; }
+
+.top-bar a:hover{
+    color: orange;
+}
 
 .menu-text {
     color: #fff; }

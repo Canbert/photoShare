@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Metadata about the webpage-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--Tab Name-->
+    <title>photoShare | Register</title>
+
+    <link rel="stylesheet" type="text/css" href="css/site-style.css">
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+
+    <header>
+        <% include ../partials/nav%>
+    </header>
+
+    <div class="row">
+        <div class="medium-6 medium-centered large-5 large-centered columns">
+            <form method="POST" action="/register">
+                <div class="row column content-box">
+                    <h3 class="text-center content-box-header">Register</h3>
+
+                    <!-- show any messages that come back with authentication -->
+                    <% if (message.length > 0) { %>
+                    <div class="alert callout" data-closable>
+                        <p class="text-center"><%= message %></p>
+                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <% } %>
+
+                    <div>
+                        <label>Username
+                            <input type="text" name="username" placeholder="Username" required>
+                        </label>
+                        <label>Email
+                            <input type="email" name="email" placeholder="name@email.com" required>
+                        </label>
+                        <label>Password
+                            <input type="password" name="password" placeholder="Password">
+                        </label>
+                        <label>Confirm Password
+                            <input type="password" name="repassword" placeholder="Confirm Password">
+                        </label>
+                        <div class="g-recaptcha" data-sitekey="6LfW3xwTAAAAAKZLH1dcg-5IQiEhrBFDwvaJwN2L"></div>
+                        <input class="button expanded" name="submit" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <% include ../partials/scripts%>
+</body>
+</html>
