@@ -6,7 +6,10 @@ module.exports = function (app, passport) {
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function (req, res) {
-        res.render('pages/index');
+        // user required for the navbar
+        res.render('pages/index',{
+            user:req.user // get the user out of session and pass to template
+        });
     });
 
     // =====================================
@@ -14,9 +17,16 @@ module.exports = function (app, passport) {
     // =====================================
     // show the login form
     app.get('/login', function (req, res) {
-
-        // render the page and pass in any flash data if it exists
-        res.render('pages/login', {message: req.flash('loginMessage')});
+        if(req.isUnauthenticated()){
+            // render the page and pass in any flash data if it exists
+            // user required for the navbar
+            res.render('pages/login', {
+                message: req.flash('loginMessage')
+            });
+        }
+        else{
+            res.redirect("/");
+        }
     });
 
     // process the login form
@@ -31,9 +41,16 @@ module.exports = function (app, passport) {
     // =====================================
     // show the register form
     app.get('/register', function (req, res) {
+        if(req.isUnauthenticated()){
+            // render the page and pass in any flash data if it exists
+            res.render('pages/register', {
+                message: req.flash('signupMessage')
+            });
+        }
+        else{
+            res.redirect("/");
+        }
 
-        // render the page and pass in any flash data if it exists
-        res.render('pages/register', {message: req.flash('signupMessage')});
     });
 
     // process the register form

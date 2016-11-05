@@ -16,11 +16,9 @@
         <% include ../partials/nav%>
     </header>
 
-    <p>
-        <strong>id</strong>: <%= user._id %><br>
-        <strong>email</strong>: <%= user.local.email %><br>
-        <strong>password</strong>: <%= user.local.password %>
-    </p>
+    <p class="text-center"><strong>username</strong>: <%= user.local.username %></p>
+    <p class="text-center"><strong>email</strong>: <%= user.local.email %></p>
+
 
     <% include ../partials/scripts%>
 </body>
