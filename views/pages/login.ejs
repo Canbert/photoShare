@@ -18,16 +18,22 @@
         <% include ../partials/nav%>
     </header>
 
-    <!-- show any messages that come back with authentication -->
-    <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-
     <div class="row">
         <div class="medium-6 medium-centered large-4 large-centered columns">
             <form  method="POST" action="/login">
                 <div class="row column contentBox">
                     <h3 class="text-center">Log In</h3>
+
+                    <!-- show any messages that come back with authentication -->
+                    <% if (message.length > 0) { %>
+                    <div class="alert callout" data-closable>
+                        <p class="text-center"><%= message %></p>
+                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <% } %>
+
                     <label>Email
                         <input type="email" name="email" placeholder="name@email.com" autofocus>
                     </label>
