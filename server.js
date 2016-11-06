@@ -10,6 +10,8 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 // configuration =================
 
@@ -35,9 +37,16 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+// socket.io chat ===================
+require('./app/chat.js')(io);
+
 // routing ========================
 require('./app/routes.js')(app, passport);
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port 8080");
+http.listen(3000,function(){
+    console.log('Chat listening on *:' + 3000);
+});
+app.listen(port, function () {
+    console.log("App listening on port " + port);
+});
