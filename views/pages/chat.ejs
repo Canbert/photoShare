@@ -30,6 +30,15 @@
 
     <% include ../partials/scripts%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.1/socket.io.js"></script>
+    <script>
+        function htmlDecode(input){
+            var e = document.createElement('div');
+            e.innerHTML = input;
+            return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+        }
+
+        var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
+    </script>
     <script src="js/controllers/chat.js"></script>
 </body>
 </html>

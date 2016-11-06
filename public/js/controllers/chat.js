@@ -1,11 +1,15 @@
 var socket = io();
 $('form').submit(function(){
-    socket.emit('userMsg', $('#msg').val());
+    socket.emit('userMsg', {username: user.local.username, message: $('#msg').val()});
     $('#msg').val('');
     return false;
 });
 socket.on('userMsg', function(msg){
-    $('#messages').append($('<div class="callout">').text(msg));
+    $('#messages').append($(
+        '<div class="callout">' +
+        '<b>' + msg.username + ': </b>' +
+        msg.message +
+        '</div>'));
 });
 
 socket.on('serverMsg', function(msg){

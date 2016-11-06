@@ -83,9 +83,9 @@ module.exports = function (app, passport) {
     // CHAT ================================
     // =====================================
     app.get('/chat', isLoggedIn, function (req, res) {
-       res.render('pages/chat'), {
+       res.render('pages/chat', {
            user : req.user // get the user out of session and pass to template
-       }
+       });
     });
 
 };
