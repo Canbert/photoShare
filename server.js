@@ -1,7 +1,9 @@
 // set up ========================
 var express = require('express');
 var app = express(); // create our app w/ express
-var port = process.env.PORT || 8080;
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 80;
 var mongoose = require('mongoose'); // mongoose for mongodb
 var morgan = require('morgan'); // log requests to the console (express4)
 var passport = require('passport');
@@ -35,9 +37,13 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+// socket.io chat ===================
+require('./app/chat.js')(io);
+
 // routing ========================
 require('./app/routes.js')(app, passport);
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port 8080");
+server.listen(port, function () {
+    console.log("Server listening on port " + port);
+});

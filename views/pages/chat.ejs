@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>photoShare | Chat</title>
+
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+
+    <header>
+        <% include ../partials/nav%>
+    </header>
+
+    <div id="messageWrapper" class="row small-12 large-centered columns">
+        <ul class="row callout" id="messages"></ul>
+        <form class="row small-12 columns" action="">
+            <div class="input-group">
+                <input class="input-group-field" id="msg" autocomplete="off" type="text">
+                <div class="input-group-button">
+                    <input type="submit" class="button" value="Send">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <% include ../partials/scripts%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.1/socket.io.js"></script>
+    <script>
+        function htmlDecode(input){
+            var e = document.createElement('div');
+            e.innerHTML = input;
+            return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+        }
+
+        var user = JSON.parse(htmlDecode("<%= JSON.stringify(user) %>"));
+    </script>
+    <script src="js/controllers/chat.js"></script>
+</body>
+</html>
