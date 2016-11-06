@@ -8,7 +8,7 @@
 
     <title>photoShare | Chat</title>
 
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
 
@@ -16,10 +16,15 @@
         <% include ../partials/nav%>
     </header>
 
-    <div class="row large-6 large-centered columns">
-        <ul id="messages"></ul>
-        <form action="">
-            <input id="msg" autocomplete="off" /><button>Send</button>
+    <div id="messageWrapper" class="row small-12 large-centered columns">
+        <ul class="row callout" id="messages"></ul>
+        <form class="row small-12 columns" action="">
+            <div class="input-group">
+                <input class="input-group-field" id="msg" autocomplete="off" type="text">
+                <div class="input-group-button">
+                    <input type="submit" class="button" value="Send">
+                </div>
+            </div>
         </form>
     </div>
 
