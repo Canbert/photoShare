@@ -14,10 +14,7 @@
 #messages li {
     padding: 5px 10px;
 }
-.userMsg{
 
-}
-
-.serverMsg{
-    background-color: red;
+#messages .callout{
+    margin: 0;
 }

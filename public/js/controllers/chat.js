@@ -5,9 +5,14 @@ $('form').submit(function(){
     return false;
 });
 socket.on('userMsg', function(msg){
-    $('#messages').append($('<li class="userMsg">').text(msg));
+    $('#messages').append($('<div class="callout">').text(msg));
 });
 
 socket.on('serverMsg', function(msg){
-    $('#messages').append($('<li class="serverMsg">').text(msg));
+    $('#messages').append($(
+        '<div class="alert callout" data-closable>' +
+         msg +
+        '<button class="close-button" aria-label="Dismiss alert" type="button" data-close>' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button></div>'));
 });
