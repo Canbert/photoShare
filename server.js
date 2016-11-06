@@ -1,6 +1,8 @@
 // set up ========================
 var express = require('express');
 var app = express(); // create our app w/ express
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var port = process.env.PORT || 8080;
 var mongoose = require('mongoose'); // mongoose for mongodb
 var morgan = require('morgan'); // log requests to the console (express4)
@@ -10,8 +12,6 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
 
 // configuration =================
 
@@ -44,9 +44,6 @@ require('./app/chat.js')(io);
 require('./app/routes.js')(app, passport);
 
 // listen (start app with node server.js) ======================================
-http.listen(3000,function(){
-    console.log('Chat listening on *:' + 3000);
-});
-app.listen(port, function () {
-    console.log("App listening on port " + port);
+server.listen(port, function () {
+    console.log("Server listening on port " + port);
 });
