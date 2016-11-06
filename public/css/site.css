@@ -5,7 +5,8 @@ body {
 }
 
 .fi-shopping-cart{
-    padding: 0!important;
+    padding-top: 0!important;
+    padding-bottom: 0!important;
     margin: 0;
     font-size: 36px;
     color: white;
