@@ -1,6 +1,14 @@
 @import "foundation.min.css";/*imports foundation framework stylesheet*/
+@import "https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css";
 body {
     /*margin-top: 2rem; */
+}
+
+.fi-shopping-cart{
+    padding: 0!important;
+    margin: 0;
+    font-size: 36px;
+    color: white;
 }
 
 .site-title{
