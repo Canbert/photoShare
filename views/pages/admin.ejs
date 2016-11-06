@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="adminUsers">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>photoShare | Admin</title>
+
+    <link rel="stylesheet" href="css/home.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+    <script src="js/controllers/admin.js"></script>
+    <script src="js/services/admin.js"></script>
+    <script src="js/adminCore.js"></script>
+</head>
+<body ng-controller="adminController">
+
+    <header>
+        <% include ../partials/nav%>
+    </header>
+
+
+    <!-- USER LIST -->
+    <div id="user-list" class="row">
+        <div class="medium-6 columns">
+
+            <!-- LOOP OVER THE USERS IN $scope.users -->
+            <div class="checkbox" ng-repeat="user in users">
+                <label>
+                    <input type="checkbox" ng-click=""> {{ user.text }}
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+
+    <% include ../partials/scripts%>
+
+
+</body>
+</html>
