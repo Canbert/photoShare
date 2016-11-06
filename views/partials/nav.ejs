@@ -12,11 +12,18 @@
     <div class="top-bar-right">
         <ul class="menu" data-responsive-menu="drilldown medium-dropdown">
             <li><a href="cart" class="fi-shopping-cart"></a></li>
-            <% if(typeof user !== "undefined"){%>
+            <% if(typeof user !== "undefined"){
+                if(user.local.privilege >= 1){
+            %>
+            <li><a href="upload">Upload Photo</a></li>
+            <%}%>
             <li class="has-submenu">
             <a href="#"><%- user.local.username%></a>
             <ul class="submenu menu vertical" data-submenu>
                 <li><a href="profile">Profile</a></li>
+                <%if(user.local.privilege == 2){%>
+                <li><a href="admin">Admin</a></li>
+                <%}%>
                 <li><a href="logout">Logout</a></li>
             </ul>
             </li>
