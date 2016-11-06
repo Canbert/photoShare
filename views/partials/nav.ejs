@@ -13,12 +13,13 @@
         <ul class="menu" data-responsive-menu="drilldown medium-dropdown">
             <% if(typeof user !== "undefined"){%>
             <li class="has-submenu">
-            <a href="#">Account</a>
+            <a href="#"><%- user.local.username%></a>
             <ul class="submenu menu vertical" data-submenu>
                 <li><a href="profile">Profile</a></li>
+                <li><a href="logout">Logout</a></li>
             </ul>
             </li>
-            <li><a href="logout">Logout</a></li>
+            <li><a href="chat">Chat</a></li>
             <%}else{%>
             <li><a href="login">Login</a></li>
             <li><a href="register">Register</a></li>
