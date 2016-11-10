@@ -16,11 +16,30 @@
     </header>
 
     <div class="row">
-        <div class="small-6 small-centered columns ">
+        <div class="medium-12 columns">
             <form class="callout" method="post" action="/upload" enctype="multipart/form-data">
+
                 <img id="image">
-                <input id="imageFile" type="file" name="formPhoto">
-                <input type="submit">
+
+                <div class="input-group">
+                    <label class="input-group-label">Name</label>
+                    <input class="input-group-field" type="text">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label">Tags</label>
+                    <input class="input-group-field" type="text">
+                </div>
+
+
+                <div class="input-group">
+                    <div class="input-group-button">
+                        <input type="file" id="imageFile"  name="formPhoto">
+                    </div>
+                    <div class="input-group-button">
+                        <input type="submit" class="button" value="Upload Photo">
+                    </div>
+                </div>
             </form>
         </div>
     </div>
