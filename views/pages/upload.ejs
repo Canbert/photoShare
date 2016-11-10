@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>photoShare | Upload</title>
+
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+    <header>
+        <% include ../partials/nav%>
+    </header>
+
+    <div class="row">
+        <div class="medium-12 columns">
+            <form class="callout" method="post" action="/upload" enctype="multipart/form-data">
+
+                <img id="image">
+
+                <div class="input-group">
+                    <label class="input-group-label">Name</label>
+                    <input class="input-group-field" type="text">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label">Tags</label>
+                    <input class="input-group-field" type="text">
+                </div>
+
+
+                <div class="input-group">
+                    <div class="input-group-button">
+                        <input type="file" id="imageFile"  name="formPhoto">
+                    </div>
+                    <div class="input-group-button">
+                        <input type="submit" class="button" value="Upload Photo">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <% include ../partials/scripts%>
+    <script src="js/controllers/upload.js"></script>
+</body>
+</html>
