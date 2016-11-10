@@ -18,7 +18,8 @@
     <div class="row">
         <div class="small-6 small-centered columns ">
             <form class="callout" method="post" action="/upload" enctype="multipart/form-data">
-                <input type="file" name="formPhoto">
+                <img id="image">
+                <input id="imageFile" type="file" name="formPhoto">
                 <input type="submit">
             </form>
         </div>
@@ -26,5 +27,6 @@
 
 
     <% include ../partials/scripts%>
+    <script src="js/controllers/upload.js"></script>
 </body>
 </html>
