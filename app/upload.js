@@ -1,3 +1,4 @@
+var Photo = require('../app/models/photo.js');
 
 module.exports = function (app, multer) {
 
@@ -5,8 +6,16 @@ module.exports = function (app, multer) {
 
     var upload = multer({dest : location});
 
+
     app.post('/upload', upload.single('formPhoto'), function (req, res) {
-        console.log(req.file);
+
+        photo = new Photo();
+
+        photo.name = "";
+        photo.tags = {};
+        photo.data = req.file;
+
+        console.log(photo);
         // res.redirect('/');
         res.write('File Uploaded!');
     });
