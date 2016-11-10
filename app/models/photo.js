@@ -9,4 +9,11 @@ var photoSchema = mongoose.schema({
 
 });
 
+var tagSchema = mongoose.schema({
+
+    name : String
+
+});
+
+module.exports = mongoose.model('Tag', tagSchema);
 module.exports = mongoose.model('Photo', photoSchema);
