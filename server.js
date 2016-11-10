@@ -12,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var multer = require('multer');
 
 // configuration =================
 
@@ -39,6 +40,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // socket.io chat ===================
 require('./app/chat.js')(io);
+
+require('./app/upload')(app, multer);
 
 // routing ========================
 require('./app/routes.js')(app, passport);
