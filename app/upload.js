@@ -12,10 +12,20 @@ module.exports = function (app, multer) {
         photo = new Photo();
 
         photo.name = "";
-        photo.tags = {};
+        photo.tags = [];
         photo.data = req.file;
 
         console.log(photo);
+
+        // save the photo
+        photo.save(function(err) {
+            if (err){
+                console.log(err);
+            }
+            else{
+                console.log('Photo uploaded');
+            }
+        });
         // res.redirect('/');
         res.write('File Uploaded!');
     });
