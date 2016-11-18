@@ -43,6 +43,8 @@ require('./app/chat.js')(io);
 
 require('./app/upload')(app, multer);
 
+require('./app/admin')(app,mongoose);
+
 // routing ========================
 require('./app/routes.js')(app, passport);
 
