@@ -10,7 +10,10 @@ var userSchema = mongoose.Schema({
     local            : {
         username     : String,
         email        : String,
-        password     : String,
+        password     : {
+            type : String,
+            select: false, // stops the password from being returned
+        },
     }
 
 });
