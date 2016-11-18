@@ -83,7 +83,7 @@ module.exports = function (app, passport) {
     // CHAT ================================
     // =====================================
     app.get('/chat', isLoggedIn, function (req, res) {
-        if(req.user.local.privilege >= 1){
+        if(req.user.privilege >= 1){
             res.render('pages/chat', {
                 user : req.user // get the user out of session and pass to template
             });
@@ -97,7 +97,7 @@ module.exports = function (app, passport) {
     // ADMIN ================================
     // =====================================
     app.get('/admin', isLoggedIn, function (req, res) {
-        if(req.user.local.privilege == 2){
+        if(req.user.privilege == 2){
             res.render('pages/admin', {
                 user : req.user // get the user out of session and pass to template
             });
@@ -111,7 +111,7 @@ module.exports = function (app, passport) {
     // IMAGE UPLOAD ================================
     // =====================================
     app.get('/upload', isLoggedIn, function (req, res) {
-        if(req.user.local.privilege >= 1){
+        if(req.user.privilege >= 1){
             res.render('pages/upload', {
                 user : req.user // get the user out of session and pass to template
             });
