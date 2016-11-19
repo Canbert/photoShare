@@ -3,8 +3,18 @@ var mongoose = require('mongoose');
 
 var photoSchema = mongoose.Schema({
 
-    name : String,
-    tags : [{type : mongoose.Schema.Types.ObjectId, ref  : 'Tag'}],
+    name : {
+        type: String,
+        required: true
+    },
+    user : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    tags : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref  : 'Tag'
+    }],
     data : []
 
 });
