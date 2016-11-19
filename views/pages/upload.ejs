@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="photos">
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
@@ -10,12 +10,14 @@
 
     <link rel="stylesheet" href="css/site.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
     <script src="js/controllers/photos.js"></script> <!-- load up our controller -->
     <script src="js/services/photos.js"></script> <!-- load our photo service -->
     <script src="js/photosCore.js"></script> <!-- load our main application -->
 
 </head>
-<body ng-controller="photosController">
+<body ng-app="photos" ng-controller="photosController">
     <header>
         <% include ../partials/nav%>
     </header>
@@ -51,5 +53,18 @@
 
 
     <% include ../partials/scripts%>
+    <script>
+        document.getElementById("imageFile").onchange = function () {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("image").src = e.target.result;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+    </script>
 </body>
 </html>

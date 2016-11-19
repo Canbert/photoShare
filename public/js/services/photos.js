@@ -1,4 +1,4 @@
-angular.module('photoService', [])
+angular.module('photosService', [])
 
     // super simple service
     // each function returns a promise object
