@@ -7,8 +7,8 @@ angular.module('photoService', [])
             get : function() {
                 return $http.get('/api/photos');
             },
-            create : function(todoData) {
-                return $http.post('/api/photos', todoData);
+            create : function(photoData) {
+                return $http.post('/api/photos', photoData);
             },
             delete : function(id) {
                 return $http.delete('/api/photos/' + id);
