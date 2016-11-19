@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
         email        : String,
         password     : {
             type : String,
-            select: false, // stops the password from being returned
+            // select: false, // stops the password from being returned
         },
     }
 
