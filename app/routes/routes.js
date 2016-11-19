@@ -1,6 +1,6 @@
 
 
-module.exports = function (app, passport) {
+module.exports = function (app) {
 
     // =====================================
     // HOME PAGE (with login links) ========
