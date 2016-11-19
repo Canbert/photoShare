@@ -42,11 +42,15 @@ app.set('json spaces', 1);
 // socket.io chat ===================
 require('./app/chat.js')(io);
 
-require('./app/admin')(app,mongoose);
-
 // routing ========================
 require('./app/routes/routes.js')(app, passport);
+require('./app/routes/admin')(app,mongoose);
 require('./app/routes/upload')(app, multer);
+require('./app/routes/login')(app, passport);
+require('./app/routes/register')(app, passport);
+require('./app/routes/profile')(app);
+require('./app/routes/chat')(app);
+
 
 // listen (start app with node server.js) ======================================
 server.listen(port, function () {
