@@ -1,16 +1,5 @@
-// document.getElementById("imageFile").onchange = function () {
-//     var reader = new FileReader();
-//
-//     reader.onload = function (e) {
-//         // get loaded data and render thumbnail.
-//         document.getElementById("image").src = e.target.result;
-//     };
-//
-//     // read the image file as a data URL.
-//     reader.readAsDataURL(this.files[0]);
-// };
 
-angular.module('photoController', [])
+angular.module('photosController', [])
 
     // inject the Upload service factory into our controller
     .controller('mainController', ['$scope','$http','Photos', function($scope, $http, Photos) {
@@ -18,8 +7,8 @@ angular.module('photoController', [])
         $scope.loading = true;
 
         // GET =====================================================================
-        // when landing on the page, get all todos and show them
-        // use the service to get all the todos
+        // when landing on the page, get all photos and show them
+        // use the service to get all the photos
         Photos.get()
             .success(function(data) {
                 $scope.photos = data;
@@ -38,11 +27,11 @@ angular.module('photoController', [])
                 // call the create function from our service (returns a promise object)
                 Photos.create($scope.formData)
 
-                // if successful creation, call our get function to get all the new todos
+                // if successful creation, call our get function to get all the new photos
                     .success(function(data) {
                         $scope.loading = false;
                         $scope.formData = {}; // clear the form so our user is ready to enter another
-                        $scope.photos = data; // assign our new list of todos
+                        $scope.photos = data; // assign our new list of photos
                     });
             }
         };
