@@ -6,7 +6,9 @@ module.exports = function (app, multer) {
 
     var upload = multer({dest : location});
 
-
+    // =====================================
+    // IMAGE UPLOAD ================================
+    // =====================================
     app.post('/upload', upload.single('formPhoto'), function (req, res) {
 
         photo = new Photo();
@@ -28,6 +30,18 @@ module.exports = function (app, multer) {
         });
         // res.redirect('/');
         res.write('File Uploaded!');
+    });
+
+
+    app.get('/upload', isLoggedIn, function (req, res) {
+        if(req.user.privilege >= 1){
+            res.render('pages/upload', {
+                user : req.user // get the user out of session and pass to template
+            });
+        }
+        else{
+            res.redirect('/');
+        }
     });
 
 }
