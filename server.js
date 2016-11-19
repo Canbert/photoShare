@@ -41,12 +41,11 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // socket.io chat ===================
 require('./app/chat.js')(io);
 
-require('./app/upload')(app, multer);
-
 require('./app/admin')(app,mongoose);
 
 // routing ========================
-require('./app/routes.js')(app, passport);
+require('./app/routes/routes.js')(app, passport);
+require('./app/routes/upload')(app, multer);
 
 // listen (start app with node server.js) ======================================
 server.listen(port, function () {
