@@ -1,6 +1,6 @@
 var socket = io();
 $('form').submit(function(){
-    socket.emit('userMsg', {username: user.local.username, message: $('#msg').val()});
+    socket.emit('userMsg', {username: user.username, message: $('#msg').val()});
     $('#msg').val('');
     return false;
 });
