@@ -46,6 +46,7 @@ require('./app/chat.js')(io);
 require('./app/routes/routes.js')(app, passport);
 require('./app/routes/admin')(app,mongoose);
 require('./app/routes/upload')(app, multer);
+require('./app/routes/login')(app, passport);
 
 // listen (start app with node server.js) ======================================
 server.listen(port, function () {
