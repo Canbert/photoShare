@@ -34,27 +34,6 @@ module.exports = function (app, multer) {
             // get and return all the photos after you create another
             getPhotos(res);
         });
-
-
-        // photo = new Photo();
-        //
-        // photo.name = "";
-        // photo.tags = [];
-        // photo.data = req.file;
-        //
-        // console.log(photo);
-        //
-        // // save the photo
-        // photo.save(function(err) {
-        //     if (err){
-        //         console.log(err);
-        //     }
-        //     else{
-        //         console.log('Photo uploaded');
-        //     }
-        // });
-        // // res.redirect('/');
-        // res.write('File Uploaded!');
     });
 
 
