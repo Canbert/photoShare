@@ -94,20 +94,6 @@ module.exports = function (app, passport) {
     });
 
     // =====================================
-    // ADMIN ================================
-    // =====================================
-    app.get('/admin', isLoggedIn, function (req, res) {
-        if(req.user.privilege == 2){
-            res.render('pages/admin', {
-                user : req.user // get the user out of session and pass to template
-            });
-        }
-        else{
-            res.redirect('/');
-        }
-    });
-
-    // =====================================
     // IMAGE UPLOAD ================================
     // =====================================
     app.get('/upload', isLoggedIn, function (req, res) {
