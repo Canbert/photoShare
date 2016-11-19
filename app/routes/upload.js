@@ -1,17 +1,5 @@
 var Photo = require('../models/photo.js');
 
-function getPhotos(res) {
-    Photo.find(function (err, photos) {
-
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        res.json(photos); // return all photos in JSON format
-    });
-};
-
 module.exports = function (app, multer) {
 
     var location = './public/photos/';
@@ -30,17 +18,29 @@ module.exports = function (app, multer) {
         }, function (err, photo) {
             if(err)
                 res.send(err);
-
-            // get and return all the photos after you create another
-            getPhotos(res);
         });
     });
 
-
     // get all photos
     app.get('/api/photos', function (req, res) {
-        // use mongoose to get all photos in the database
-        getPhotos(res);
+        Photo.find(function (err, photos) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err) {
+                res.send(err);
+            }
+
+            res.json(photos); // return all photos in JSON format
+        });
+    });
+
+    // get one photo based on the id
+    app.get('/api/photos/:photo_id', function (req, res) {
+        Photo.findById(req.params.photo_id, function (err, photo) {
+            if(err)
+                res.send(err);
+            res.send(photo);
+        });
     });
 
 
