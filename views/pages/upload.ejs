@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="photos">
 <head>
 
     <meta charset="utf-8">
@@ -9,21 +9,26 @@
     <title>photoShare | Upload</title>
 
     <link rel="stylesheet" href="css/site.css">
+
+    <script src="js/controllers/photos.js"></script> <!-- load up our controller -->
+    <script src="js/services/photos.js"></script> <!-- load our photo service -->
+    <script src="js/photosCore.js"></script> <!-- load our main application -->
+
 </head>
-<body>
+<body ng-controller="photosController">
     <header>
         <% include ../partials/nav%>
     </header>
 
     <div class="row">
         <div class="medium-12 columns">
-            <form class="callout" method="post" action="/upload" enctype="multipart/form-data">
+            <form class="callout" method="post" action="/api/photos" enctype="multipart/form-data">
 
                 <img id="image">
 
                 <div class="input-group">
                     <label class="input-group-label">Name</label>
-                    <input class="input-group-field" type="text">
+                    <input class="input-group-field" type="text" ng-model="formData.text">
                 </div>
 
                 <div class="input-group">
@@ -37,7 +42,7 @@
                         <input type="file" id="imageFile"  name="formPhoto">
                     </div>
                     <div class="input-group-button">
-                        <input type="submit" class="button" value="Upload Photo">
+                        <input type="submit" class="button" value="Upload Photo" ng-click="createPhoto()">
                     </div>
                 </div>
             </form>
@@ -46,6 +51,5 @@
 
 
     <% include ../partials/scripts%>
-    <script src="js/controllers/upload.js"></script>
 </body>
 </html>
