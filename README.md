@@ -5,6 +5,7 @@ A web application that allows users to upload pictures to sell.
 # How to use
 #### Installing packages
 
+__Note:__ Before running these commands make sure you are at the root of the project.
 ~~~~
 npm install
 ~~~~
