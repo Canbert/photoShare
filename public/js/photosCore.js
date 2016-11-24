@@ -1,1 +1,1 @@
-angular.module('photos', ['photosController', 'photosService']);
+angular.module('photosCore', ['photosController', 'photosService']);
