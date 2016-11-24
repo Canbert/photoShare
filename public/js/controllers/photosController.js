@@ -6,16 +6,6 @@ angular.module('photosController', [])
         $scope.formData = {};
         $scope.loading = true;
 
-        // GET =====================================================================
-        // when landing on the page, get all photos and show them
-        // use the service to get all the photos
-        Photos.get()
-            .success(function(data) {
-                $scope.photos = data;
-                $scope.loading = false;
-                console.log($scope.photos);
-            });
-
         // CREATE ==================================================================
         // when submitting the add form, send the text to the node API
         $scope.createPhoto = function() {
