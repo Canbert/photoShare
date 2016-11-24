@@ -25,7 +25,7 @@ module.exports = function (app, multer) {
     // get all photos
     app.get('/api/photos', function (req, res) {
         Photo.find({})
-            .populate('user','local.username')
+            .populate('user','username')
             .exec(function (err, photos) {
 
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -40,7 +40,7 @@ module.exports = function (app, multer) {
     // get one photo based on the id
     app.get('/api/photos/:photo_id', function (req, res) {
         Photo.findById(req.params.photo_id)
-            .populate('user','local.username')
+            .populate('user','username')
             .exec( function (err, photo) {
             if(err)
                 res.send(err);
