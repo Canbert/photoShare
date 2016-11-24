@@ -13,6 +13,8 @@ var session      = require('express-session');
 var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var multer = require('multer');
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
 
 // configuration =================
 
@@ -45,7 +47,7 @@ require('./app/chat.js')(io);
 // routing ========================
 require('./app/routes/routes.js')(app, passport);
 require('./app/routes/admin')(app,mongoose);
-require('./app/routes/upload')(app, multer);
+require('./app/routes/upload')(app, multer, multipartyMiddleware);
 require('./app/routes/login')(app, passport);
 require('./app/routes/register')(app, passport);
 require('./app/routes/profile')(app);

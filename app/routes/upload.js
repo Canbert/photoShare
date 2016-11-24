@@ -1,27 +1,39 @@
 var Photo = require('../models/photo.js');
 
-module.exports = function (app, multer) {
+module.exports = function (app, multer, multipartyMiddleware) {
 
     // =====================================
     // IMAGE UPLOAD ================================
     // =====================================
 
-    function upload(req) {
-        var upload = multer({dest : './public/photos/'});
-        upload.single(req.file);
-    }
+    // function upload(req) {
+    //     var upload = multer({dest : './public/photos/'});
+    //     upload.single(req.file);
+    // }
 
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/photos/')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now())
+        }
+    });
 
-    app.post('/api/photos', function (req, res) {
+    var upload = multer({storage: storage});
+
+    app.post('/api/photos',upload.single('file'), function (req, res) {
 
         var photo = new Photo();
 
-        console.log(req.body.otherInfo);
+        console.log(req.body);
+        console.log(req.form);
+        console.log(req.formData);
 
-        photo.name = "test";//req.body.name;
-        photo.user = 1;//req.user._id;
-        photo.tags = "tag";//req.body.tags;
-        photo.data = [];//req.file;
+        photo.name = req.body.name;
+        photo.user = req.user._id;
+        photo.tags = [];
+        photo.data = req.body.file;
 
         photo.save(function (err) {
            if(err)
@@ -59,15 +71,15 @@ module.exports = function (app, multer) {
     });
 
 
-    app.get('/upload', /*isLoggedIn,*/ function (req, res) {
-        // if(req.user.privilege >= 1){
+    app.get('/upload', isLoggedIn, function (req, res) {
+        if(req.user.privilege >= 1){
             res.render('pages/upload', {
                 user : req.user // get the user out of session and pass to template
             });
-        // }
-        // else{
-        //     res.redirect('/');
-        // }
+        }
+        else{
+            res.redirect('/');
+        }
     });
 }
 
