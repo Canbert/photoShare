@@ -3,9 +3,7 @@ var mongoose = require('mongoose');
 
 var photoSchema = mongoose.Schema({
 
-    name : {
-        type: String
-    },
+    name : String,
     user : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

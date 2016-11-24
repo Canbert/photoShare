@@ -6,29 +6,29 @@ module.exports = function (app, multer) {
     // IMAGE UPLOAD ================================
     // =====================================
 
-    // Used for actually storing the photo to disk
     function upload(req) {
-
         var upload = multer({dest : './public/photos/'});
-
-        upload.single(req.body.photoFile);
+        upload.single(req.file);
     }
+
 
     app.post('/api/photos', function (req, res) {
 
-        console.log(req.body.data);
+        var photo = new Photo();
 
-        Photo.create({
-            name : req.body.name,
-            user : req.user._id,
-            tags : req.body.tags,
-            data : req.body.photo
-        }, function (err) {
-            if(err)
-                res.send(err);
-            else
-                console.log(this);
-                // ng-file-upload();
+        console.log(req.body.otherInfo);
+
+        photo.name = "test";//req.body.name;
+        photo.user = 1;//req.user._id;
+        photo.tags = "tag";//req.body.tags;
+        photo.data = [];//req.file;
+
+        photo.save(function (err) {
+           if(err)
+               res.send(err);
+            res.json(photo.toString());
+           // else
+           //     upload(req);
         });
     });
 
@@ -59,17 +59,16 @@ module.exports = function (app, multer) {
     });
 
 
-    app.get('/upload', isLoggedIn, function (req, res) {
-        if(req.user.privilege >= 1){
+    app.get('/upload', /*isLoggedIn,*/ function (req, res) {
+        // if(req.user.privilege >= 1){
             res.render('pages/upload', {
                 user : req.user // get the user out of session and pass to template
             });
-        }
-        else{
-            res.redirect('/');
-        }
+        // }
+        // else{
+        //     res.redirect('/');
+        // }
     });
-
 }
 
 
