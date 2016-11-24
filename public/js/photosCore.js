@@ -12,7 +12,7 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
     $scope.upload = function (file) {
         Upload.upload({
             url: '/api/photos',
-            data: {file: file, 'name': $scope.formData.name, 'tags': $scope.formData.tags}
+            data: {file: file, 'name': $scope.name, 'tags': $scope.tags}
         }).then(function (resp) {
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
