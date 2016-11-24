@@ -2,7 +2,7 @@
 angular.module('photosController', [])
 
     // inject the Upload service factory into our controller
-    .controller('mainController', ['$scope','$http','Photos', function($scope, $http, Photos) {
+    .controller('uploadController', ['$scope','$http','Photos', function($scope, $http, Photos) {
         $scope.formData = {};
         $scope.loading = true;
 
@@ -13,6 +13,7 @@ angular.module('photosController', [])
             .success(function(data) {
                 $scope.photos = data;
                 $scope.loading = false;
+                console.log($scope.photos);
             });
 
         // CREATE ==================================================================
@@ -22,6 +23,7 @@ angular.module('photosController', [])
             // validate the formData to make sure that something is there
             // if form is empty, nothing will happen
             if ($scope.formData.text != undefined) {
+                console.log($scope.formData);
                 $scope.loading = true;
 
                 // call the create function from our service (returns a promise object)

@@ -12,19 +12,19 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
-    <script src="js/controllers/photos.js"></script> <!-- load up our controller -->
-    <script src="js/services/photos.js"></script> <!-- load our photo service -->
+    <script src="js/controllers/photosController.js"></script> <!-- load up our controller -->
+    <script src="js/services/photosService.js"></script> <!-- load our photo service -->
     <script src="js/photosCore.js"></script> <!-- load our main application -->
 
 </head>
-<body ng-app="photos" ng-controller="photosController">
+<body ng-app="photosCore" ng-controller="uploadController">
     <header>
         <% include ../partials/nav%>
     </header>
 
     <div class="row">
         <div class="medium-12 columns">
-            <form class="callout" method="post" action="/api/photos" enctype="multipart/form-data">
+            <form class="callout" enctype="multipart/form-data">
 
                 <img id="image">
 
