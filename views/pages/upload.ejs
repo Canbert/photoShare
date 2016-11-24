@@ -12,21 +12,25 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
-    <script src="js/controllers/photosController.js"></script> <!-- load up our controller -->
-    <script src="js/services/photosService.js"></script> <!-- load our photo service -->
-    <script src="js/photosCore.js"></script> <!-- load our main application -->
+    <script src="js/ng-file-upload/ng-file-upload.js"></script>
+
+    <script src="js/services/photosService.js"></script> <!-- load up our controller -->
+    <script src="js/photosCore.js"></script>
 
 </head>
-<body ng-app="photosCore" ng-controller="uploadController">
+<body>
     <header>
         <% include ../partials/nav%>
     </header>
 
     <div class="row">
         <div class="medium-12 columns">
-            <form class="callout" enctype="multipart/form-data">
+            <form ng-app="photoUpload" ng-controller="uploadCtrl" class="callout" enctype="multipart/form-data">
 
-                <img id="image">
+                <img ngf-src="file" ngf-background="file"
+                ngf-resize="{height: 100, quality: 0.9}"
+                ngf-no-object-url="false"
+                >
 
                 <div class="input-group">
                     <label class="input-group-label">Name</label>
@@ -40,10 +44,12 @@
 
                 <div class="input-group">
                     <div class="input-group-button">
-                        <input type="file" id="imageFile" file-model="photoFile">
+                        <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                             ngf-resize="{width: 100, height: 100}">Select</div>
                     </div>
                     <div class="input-group-button">
-                        <input type="submit" class="button" value="Upload Photo" ng-click="createPhoto()">
+                        <button class="button" ng-click="submit()">Upload</button>
                     </div>
                 </div>
             </form>
@@ -53,17 +59,17 @@
 
     <% include ../partials/scripts%>
     <script>
-        document.getElementById("imageFile").onchange = function () {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("image").src = e.target.result;
-            };
-
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
-        };
+//        document.getElementById("imageFile").onchange = function () {
+//            var reader = new FileReader();
+//
+//            reader.onload = function (e) {
+//                // get loaded data and render thumbnail.
+//                document.getElementById("image").src = e.target.result;
+//            };
+//
+//            // read the image file as a data URL.
+//            reader.readAsDataURL(this.files[0]);
+//        };
     </script>
 </body>
 </html>
