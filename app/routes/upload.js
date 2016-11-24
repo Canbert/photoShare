@@ -1,6 +1,6 @@
 var Photo = require('../models/photo.js');
 
-module.exports = function (app, multer, multipartyMiddleware) {
+module.exports = function (app, multer) {
 
     // =====================================
     // IMAGE UPLOAD ================================
