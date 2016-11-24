@@ -12,9 +12,12 @@ angular.module('photosController', [])
 
             // validate the formData to make sure that something is there
             // if form is empty, nothing will happen
-            if ($scope.formData.text != undefined) {
-                console.log($scope.formData);
+            if ($scope.formData.name != undefined) {
                 $scope.loading = true;
+
+                var file = $scope.photoFile;
+                var fd = new FormData();
+                fd.append('file',file);
 
                 // call the create function from our service (returns a promise object)
                 Photos.create($scope.formData)

@@ -2,23 +2,33 @@ var Photo = require('../models/photo.js');
 
 module.exports = function (app, multer) {
 
-    var location = './public/photos/';
-
-    var upload = multer({dest : location});
-
     // =====================================
     // IMAGE UPLOAD ================================
     // =====================================
-    app.post('/api/photos', upload.single('formPhoto'), function (req, res) {
+
+    // Used for actually storing the photo to disk
+    function upload(req) {
+
+        var upload = multer({dest : './public/photos/'});
+
+        upload.single(req.body.photoFile);
+    }
+
+    app.post('/api/photos', function (req, res) {
+
+        console.log(req.body);
 
         Photo.create({
-            name : req.body.text,
+            name : req.body.name,
             user : req.user._id,
-            tags : [],
-            data : req.file
-        }, function (err, photo) {
+            tags : req.body.tags,
+            data : req.body.photo
+        }, function (err) {
             if(err)
                 res.send(err);
+            else
+                console.log(this);
+                // upload();
         });
     });
 
@@ -61,6 +71,7 @@ module.exports = function (app, multer) {
     });
 
 }
+
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

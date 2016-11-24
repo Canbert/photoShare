@@ -30,18 +30,17 @@
 
                 <div class="input-group">
                     <label class="input-group-label">Name</label>
-                    <input class="input-group-field" type="text" ng-model="formData.text">
+                    <input class="input-group-field" type="text" ng-model="formData.name">
                 </div>
 
                 <div class="input-group">
                     <label class="input-group-label">Tags</label>
-                    <input class="input-group-field" type="text">
+                    <input class="input-group-field" type="text" ng-model="formData.tags">
                 </div>
-
 
                 <div class="input-group">
                     <div class="input-group-button">
-                        <input type="file" id="imageFile"  name="formPhoto">
+                        <input type="file" id="imageFile" file-model="photoFile">
                     </div>
                     <div class="input-group-button">
                         <input type="submit" class="button" value="Upload Photo" ng-click="createPhoto()">
