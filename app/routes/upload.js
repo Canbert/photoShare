@@ -16,7 +16,7 @@ module.exports = function (app, multer) {
 
     app.post('/api/photos', function (req, res) {
 
-        console.log(req.body);
+        console.log(req.body.data);
 
         Photo.create({
             name : req.body.name,
@@ -28,7 +28,7 @@ module.exports = function (app, multer) {
                 res.send(err);
             else
                 console.log(this);
-                // upload();
+                // ng-file-upload();
         });
     });
 
