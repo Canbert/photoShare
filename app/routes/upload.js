@@ -24,24 +24,32 @@ module.exports = function (app, multer) {
 
     app.post('/api/photos',upload.single('file'), function (req, res) {
 
-        var photo = new Photo();
+        try {
+            console.log(req.file.filename);
+            new ExifImage({ image : req.file.filename }, function (error, exifData) {
+                if (error)
+                    console.log('Error: '+error.message);
+                else
+                    console.log(exifData); // Do something with your data!
 
-        console.log(req.body);
-        console.log(req.form);
-        console.log(req.formData);
+                    var photo = new Photo();
 
-        photo.name = req.body.name;
-        photo.user = req.user._id;
-        photo.tags = [];
-        photo.data = req.body.file;
+                    photo.name = req.body.name;
+                    photo.user = req.user._id;
+                    photo.tags = [];
+                    photo.data = req.body.file;
 
-        photo.save(function (err) {
-           if(err)
-               res.send(err);
-            res.json(photo.toString());
-           // else
-           //     upload(req);
-        });
+                    photo.save(function (err) {
+                        if(err)
+                            res.send(err);
+                        res.json(photo.toString());
+                        // else
+                        //     upload(req);
+                    });
+            });
+        } catch (error) {
+            console.log('Error: ' + error.message);
+        }
     });
 
     // get all photos
