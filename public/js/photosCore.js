@@ -1,6 +1,9 @@
-var app = angular.module('photoUpload', ['ngFileUpload', 'photosService']);
+var app = angular.module('photoUpload', ['ngFileUpload', 'photosService', 'mm.foundation.progressbar']);
 
 app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
+
+    $scope.dynamic = 0;
+
     // ng-file-upload later on form submit or something similar
     $scope.submit = function() {
         if ($scope.form.file.$valid && $scope.file) {
@@ -19,7 +22,8 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            $scope.dynamic = progressPercentage;
+            // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
 }]);
