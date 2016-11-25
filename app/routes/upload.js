@@ -1,6 +1,6 @@
 var Photo = require('../models/photo.js');
 
-module.exports = function (app, multer) {
+module.exports = function (app, multer, ExifImage) {
 
     // =====================================
     // IMAGE UPLOAD ================================
@@ -25,8 +25,7 @@ module.exports = function (app, multer) {
     app.post('/api/photos',upload.single('file'), function (req, res) {
 
         try {
-            console.log(req.file.filename);
-            new ExifImage({ image : req.file.filename }, function (error, exifData) {
+            new ExifImage({ image : req.file.path }, function (error, exifData) {
                 if (error)
                     console.log('Error: '+error.message);
                 else
