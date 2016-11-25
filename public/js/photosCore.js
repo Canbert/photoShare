@@ -1,1 +1,1 @@
-var app = angular.module('photoUpload', ['photosController', 'photosService']);
+var app = angular.module('photosCore', ['photosController', 'photosService']);
