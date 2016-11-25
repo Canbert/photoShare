@@ -42,16 +42,11 @@ module.exports = function (app, multer, ExifImage) {
                 }
                 console.log(photo.tags);
 
-
-
-
-
                 photo.name = req.body.name;
                 photo.user = req.user._id;
                 photo.price = req.body.price;
                 photo.data = exifData;
-
-
+                photo.url = req.file.path;
 
                 photo.save(function (err) {
                     if(err)
@@ -92,7 +87,6 @@ module.exports = function (app, multer, ExifImage) {
             res.send(photo);
         });
     });
-
 
     app.get('/upload', isLoggedIn, function (req, res) {
         if(req.user.privilege >= 1){
