@@ -29,14 +29,19 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
     };
 
     $scope.addTag = function () {
-        console.log($scope.tags);
         if(!isInTags($scope.tag)){
             $scope.tags.push($scope.tag);
+            console.log($scope.tags);
         }
         else{
             console.log("Already exists!");
         }
-    }
+    };
+
+    $scope.removeTag = function (tag) {
+        var element = $scope.tags.indexOf(tag);
+        $scope.tags.splice(element,1);
+    };
 
     function isInTags(obj) {
         return ($scope.tags.indexOf(obj) != -1);
