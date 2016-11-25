@@ -46,7 +46,11 @@ module.exports = function (app, multer, ExifImage) {
                 photo.user = req.user._id;
                 photo.price = req.body.price;
                 photo.data = exifData;
-                photo.url = req.file.path;
+
+                var url = req.file.path;
+                url = url.substring(6,url.length); // remove the "public" part of the url
+
+                photo.url = url;
 
                 photo.save(function (err) {
                     if(err)
