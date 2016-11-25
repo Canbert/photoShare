@@ -3,6 +3,7 @@ var app = angular.module('photoUpload', ['ngFileUpload', 'photosService', 'mm.fo
 app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
 
     $scope.dynamic = 0;
+    $scope.tags = [];
 
     // ng-file-upload later on form submit or something similar
     $scope.submit = function() {
@@ -26,4 +27,19 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
+
+    $scope.addTag = function () {
+        console.log($scope.tags);
+        if(!isInTags($scope.tag)){
+            $scope.tags.push($scope.tag);
+        }
+        else{
+            console.log("Already exists!");
+        }
+    }
+
+    function isInTags(obj) {
+        return ($scope.tags.indexOf(obj) != -1);
+    }
 }]);
+
