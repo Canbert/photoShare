@@ -17,6 +17,16 @@ var photoSchema = mongoose.Schema({
 
 });
 
+// Getter
+photoSchema.path('price').get(function(num) {
+    return (num / 100).toFixed(2);
+});
+
+// Setter
+photoSchema.path('price').set(function(num) {
+    return num * 100;
+});
+
 var tagSchema = mongoose.Schema({
 
     name : String
