@@ -1,15 +1,11 @@
-var Photo = require('../models/photo.js');
+var Photo = require('../models/photo');
+var Tag = require('../models/tag');
 
 module.exports = function (app, multer, ExifImage) {
 
     // =====================================
     // IMAGE UPLOAD ================================
     // =====================================
-
-    // function upload(req) {
-    //     var upload = multer({dest : './public/photos/'});
-    //     upload.single(req.file);
-    // }
 
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -29,15 +25,38 @@ module.exports = function (app, multer, ExifImage) {
 
                 var photo = new Photo();
 
+                for(var i = 0; i < req.body.tags.length; i++){
+
+                    var newTag = new Tag();
+
+                    newTag.name = req.body.tags[i];
+
+                    photo.tags.push(newTag._id);
+
+
+
+                    newTag.save(function (err) {
+                        if (err)
+                            res.send(err);
+                    });
+                }
+                console.log(photo.tags);
+
+
+
+
+
                 photo.name = req.body.name;
                 photo.user = req.user._id;
                 photo.price = req.body.price;
-                photo.tags = [];
                 photo.data = exifData;
+
+
 
                 photo.save(function (err) {
                     if(err)
                         res.send(err);
+                    console.log(photo);
                     res.json(photo.toString());
                     // else
                     //     upload(req);

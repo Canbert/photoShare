@@ -14,6 +14,7 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
 
     // ng-file-upload on file select or drop
     $scope.upload = function (file) {
+        // console.log($scope.tags);
         Upload.upload({
             url: '/api/photos',
             data: {file: file, name: $scope.name, tags: $scope.tags, price: $scope.price}
@@ -24,17 +25,13 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.dynamic = progressPercentage;
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
 
     $scope.addTag = function () {
         if(!isInTags($scope.tag)){
             $scope.tags.push($scope.tag);
-            console.log($scope.tags);
-        }
-        else{
-            console.log("Already exists!");
         }
     };
 
