@@ -27,11 +27,4 @@ photoSchema.path('price').set(function(num) {
     return num * 100;
 });
 
-var tagSchema = mongoose.Schema({
-
-    name : String
-
-});
-
-module.exports = mongoose.model('Tag', tagSchema);
 module.exports = mongoose.model('Photo', photoSchema);
