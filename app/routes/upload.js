@@ -31,6 +31,7 @@ module.exports = function (app, multer, ExifImage) {
 
                 photo.name = req.body.name;
                 photo.user = req.user._id;
+                photo.price = req.body.price;
                 photo.tags = [];
                 photo.data = exifData;
 
