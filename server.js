@@ -51,6 +51,7 @@ require('./app/routes/login')(app, passport);
 require('./app/routes/register')(app, passport);
 require('./app/routes/profile')(app);
 require('./app/routes/chat')(app);
+require('./app/routes/photo')(app);
 
 
 // listen (start app with node server.js) ======================================
