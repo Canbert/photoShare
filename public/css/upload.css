@@ -1,0 +1,11 @@
+@import "site.css";
+
+.previewImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50vh;
+    width: auto;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}

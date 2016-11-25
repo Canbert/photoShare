@@ -8,43 +8,65 @@
 
     <title>photoShare | Upload</title>
 
-    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/upload.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
-    <script src="js/controllers/photos.js"></script> <!-- load up our controller -->
-    <script src="js/services/photos.js"></script> <!-- load our photo service -->
-    <script src="js/photosCore.js"></script> <!-- load our main application -->
+    <script src="js/ng-file-upload/ng-file-upload.js"></script>
+
+    <script src="js/angular-foundation/transition.js"></script>
+    <script src="js/angular-foundation/progressbar.js"></script>
+    <script src="js/services/photosService.js"></script> <!-- load up our controller -->
+    <script src="js/photosCore.js"></script>
 
 </head>
-<body ng-app="photos" ng-controller="photosController">
+<body>
     <header>
         <% include ../partials/nav%>
     </header>
 
     <div class="row">
         <div class="medium-12 columns">
-            <form class="callout" method="post" action="/api/photos" enctype="multipart/form-data">
+            <form ng-app="photoUpload" ng-controller="uploadCtrl" name="form" class="callout">
 
-                <img id="image">
+                <img class="previewImage" ngf-src="file" ngf-background="file">
 
                 <div class="input-group">
                     <label class="input-group-label">Name</label>
-                    <input class="input-group-field" type="text" ng-model="formData.text">
+                    <input class="input-group-field" type="text" ng-model="name">
+                </div>
+
+                <div ng-repeat="tag in tags">
+                    <div class="small-1 column callout" data-closable>
+                        <p> {{tag}} </p>
+                        <button class="close-button" aria-label="Dismiss alert" type="button" ng-click="removeTag(tag)" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="input-group">
-                    <label class="input-group-label">Tags</label>
-                    <input class="input-group-field" type="text">
+                    <input class="input-group-field" type="text" ng-model="tag">
+                    <div class="input-group-button">
+                        <button class="button" ng-click="addTag()">Add Tag</button>
+                    </div>
                 </div>
 
+                <div class="input-group">
+                    <label class="input-group-label">£</label>
+                    <input class="input-group-field" ng-model="price" type="number" min="0.01" step="0.01" value="25.67"/>
+                </div>
+
+                <progressbar value="dynamic">{{dynamic}}%</progressbar>
 
                 <div class="input-group">
                     <div class="input-group-button">
-                        <input type="file" id="imageFile"  name="formPhoto">
+                        <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                             >Select</div>
                     </div>
                     <div class="input-group-button">
-                        <input type="submit" class="button" value="Upload Photo" ng-click="createPhoto()">
+                        <button class="button" ng-click="submit()">Upload</button>
                     </div>
                 </div>
             </form>
@@ -53,18 +75,5 @@
 
 
     <% include ../partials/scripts%>
-    <script>
-        document.getElementById("imageFile").onchange = function () {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("image").src = e.target.result;
-            };
-
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
-        };
-    </script>
 </body>
 </html>

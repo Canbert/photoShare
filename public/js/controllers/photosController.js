@@ -2,18 +2,9 @@
 angular.module('photosController', [])
 
     // inject the Upload service factory into our controller
-    .controller('mainController', ['$scope','$http','Photos', function($scope, $http, Photos) {
+    .controller('uploadController', ['$scope','$http','Photos', function($scope, $http, Photos) {
         $scope.formData = {};
         $scope.loading = true;
-
-        // GET =====================================================================
-        // when landing on the page, get all photos and show them
-        // use the service to get all the photos
-        Photos.get()
-            .success(function(data) {
-                $scope.photos = data;
-                $scope.loading = false;
-            });
 
         // CREATE ==================================================================
         // when submitting the add form, send the text to the node API
@@ -21,8 +12,12 @@ angular.module('photosController', [])
 
             // validate the formData to make sure that something is there
             // if form is empty, nothing will happen
-            if ($scope.formData.text != undefined) {
+            if ($scope.formData.name != undefined) {
                 $scope.loading = true;
+
+                var file = $scope.photoFile;
+                var fd = new FormData();
+                fd.append('file',file);
 
                 // call the create function from our service (returns a promise object)
                 Photos.create($scope.formData)

@@ -1,31 +1,76 @@
-var Photo = require('../models/photo.js');
+var Photo = require('../models/photo');
+var Tag = require('../models/tag');
 
-module.exports = function (app, multer) {
-
-    var location = './public/photos/';
-
-    var upload = multer({dest : location});
+module.exports = function (app, multer, ExifImage) {
 
     // =====================================
     // IMAGE UPLOAD ================================
     // =====================================
-    app.post('/api/photos', upload.single('formPhoto'), function (req, res) {
 
-        Photo.create({
-            name : req.body.text,
-            user : req.user._id,
-            tags : [],
-            data : req.file
-        }, function (err, photo) {
-            if(err)
-                res.send(err);
-        });
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/photos/')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now())
+        }
+    });
+
+    var upload = multer({storage: storage});
+
+    app.post('/api/photos',upload.single('file'), function (req, res) {
+
+        try {
+            new ExifImage({ image : req.file.path }, function (error, exifData) {
+
+                var photo = new Photo();
+
+                for(var i = 0; i < req.body.tags.length; i++){
+
+                    var newTag = new Tag();
+
+                    newTag.name = req.body.tags[i];
+
+                    photo.tags.push(newTag._id);
+
+
+
+                    newTag.save(function (err) {
+                        if (err)
+                            res.send(err);
+                    });
+                }
+                console.log(photo.tags);
+
+
+
+
+
+                photo.name = req.body.name;
+                photo.user = req.user._id;
+                photo.price = req.body.price;
+                photo.data = exifData;
+
+
+
+                photo.save(function (err) {
+                    if(err)
+                        res.send(err);
+                    console.log(photo);
+                    res.json(photo.toString());
+                    // else
+                    //     upload(req);
+                });
+            });
+        } catch (error) {
+            console.log('Error: ' + error.message);
+        }
     });
 
     // get all photos
     app.get('/api/photos', function (req, res) {
         Photo.find({})
-            .populate('user','local.username')
+            .populate('user','username')
             .exec(function (err, photos) {
 
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -40,7 +85,7 @@ module.exports = function (app, multer) {
     // get one photo based on the id
     app.get('/api/photos/:photo_id', function (req, res) {
         Photo.findById(req.params.photo_id)
-            .populate('user','local.username')
+            .populate('user','username')
             .exec( function (err, photo) {
             if(err)
                 res.send(err);
@@ -59,8 +104,8 @@ module.exports = function (app, multer) {
             res.redirect('/');
         }
     });
-
 }
+
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
