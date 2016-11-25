@@ -8,11 +8,12 @@ var photoSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    price : Number,
     tags : [{
         type : mongoose.Schema.Types.ObjectId,
         ref  : 'Tag'
     }],
-    data : []
+    data : [],
 
 });
 
