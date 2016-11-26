@@ -15,23 +15,23 @@
             <% if(typeof user !== "undefined"){
                 if(user.privilege >= 1){
             %>
-            <li><a href="upload">Upload Photo</a></li>
-            <li><a href="chat">Chat</a></li>
+            <li><a href="/upload">Upload Photo</a></li>
+            <li><a href="/chat">Chat</a></li>
             <%}%>
             <li class="has-submenu">
-            <a href="#"><%- user.username%></a>
+            <a href="/profile"><%- user.username%></a>
             <ul class="submenu menu vertical" data-submenu>
-                <li><a href="profile">Profile</a></li>
+                <li><a href="/profile">Profile</a></li>
                 <%if(user.privilege == 2){%>
-                <li><a href="admin">Admin</a></li>
+                <li><a href="/admin">Admin</a></li>
                 <%}%>
-                <li><a href="logout">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
             </li>
 
             <%}else{%>
-            <li><a href="login">Login</a></li>
-            <li><a href="register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
             <%}%>
         </ul>
     </div>
