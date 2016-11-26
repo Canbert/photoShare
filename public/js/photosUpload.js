@@ -1,6 +1,6 @@
 var app = angular.module('photoUpload', ['ngFileUpload', 'photosService', 'mm.foundation.progressbar']);
 
-app.controller('uploadCtrl', ['$scope', '$sce', 'Upload', function ($scope,$sce, Upload) {
+app.controller('uploadCtrl', ['$scope', '$sce','$window', 'Upload', function ($scope, $sce, $window, Upload) {
 
     $scope.isntVisible = true;
     $scope.isntVisibleProgress = true;
@@ -40,7 +40,8 @@ app.controller('uploadCtrl', ['$scope', '$sce', 'Upload', function ($scope,$sce,
             url: '/api/photos',
             data: {file: file, name: $scope.name, tags: $scope.tags, price: $scope.price}
         }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            // console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data._id);
+            $window.location.href = '/photo/' + resp.data._id;
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {

@@ -48,7 +48,7 @@ module.exports = function (app, multer, ExifImage) {
                             // if(err)
                             //     res.send(err);
                             // console.log(photo);
-                            // res.json(photo.toString());
+                            res.json(photo);
                             // else
                             //     upload(req);
                         });
