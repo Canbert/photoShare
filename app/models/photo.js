@@ -13,7 +13,8 @@ var photoSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref  : 'Tag'
     }],
-    data : [],
+    url: String,
+    data : []
 
 });
 

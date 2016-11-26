@@ -7,6 +7,9 @@ angular.module('photosService', [])
             get : function() {
                 return $http.get('/api/photos');
             },
+            get : function (id) {
+                return $http.get('/api/photos/' + id);
+            },
             create : function(photoData) {
                 return $http.post('/api/photos', photoData);
             },

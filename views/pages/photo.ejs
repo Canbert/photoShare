@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>photoShare | Photo</title>
+
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <% include ../partials/nav%>
+    </header>
+    <div style="background: black">
+        <div class="row" >
+            <div class="large-12 large-centered columns">
+                <img class="column" src="<%= photo.url %>">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <h3><%= photo.name %></h3>
+            <a href=""><%= photo.user.username %></a>
+        </div>
+        <div class="small-6 columns">
+            <button class="button expanded float-right">Buy Photo</button>
+        </div>
+    </div>
+    <div class="row small-12 columns">
+        <hr>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+        </div>
+        <div class="medium-6 columns">
+            <% if(photo.data.length > 0){%>
+
+            <ul class="accordion" data-accordion data-allow-all-closed="true">
+                <li class="accordion-item" data-accordion-item>
+                    <a href="#" class="accordion-title">Image Data</a>
+                    <%
+                    for(var i = 0; i < photo.data.length;i++){
+                        for(p in photo.data[i].image){%>
+
+                    <div class="accordion-content" data-tab-content><%= p + " - " + photo.data[i].image[p]%></div>
+
+                    <%
+                        }
+                    }
+                    %>
+                </li>
+                <li class="accordion-item" data-accordion-item>
+                    <a href="#" class="accordion-title">EXIF Data</a>
+                    <%
+                    for(var i = 0; i < photo.data.length;i++){
+                            for(p in photo.data[i].exif){%>
+
+                    <div class="accordion-content" data-tab-content><%= p + " - " + photo.data[i].exif[p]%></div>
+                    <%
+                    }
+                    }
+                    %>
+                </li>
+            </ul>
+            <% } %>
+        </div>
+    </div>
+
+    <% include ../partials/scripts%>
+</body>
+</html>

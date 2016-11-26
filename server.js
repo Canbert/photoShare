@@ -44,13 +44,14 @@ app.set('json spaces', 2);
 require('./app/chat.js')(io);
 
 // routing ========================
-require('./app/routes/routes.js')(app, passport);
 require('./app/routes/admin')(app,mongoose);
 require('./app/routes/upload')(app, multer, ExifImage);
 require('./app/routes/login')(app, passport);
 require('./app/routes/register')(app, passport);
 require('./app/routes/profile')(app);
 require('./app/routes/chat')(app);
+require('./app/routes/photo')(app);
+require('./app/routes/routes.js')(app, passport); // this needs to be last for it not to 404
 
 
 // listen (start app with node server.js) ======================================
