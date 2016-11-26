@@ -7,20 +7,26 @@ module.exports = function (app) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function (req, res) {
-        res.render('pages/profile', {
-            user: req.user // get the user out of session and pass to template
-        });
+            res.render('pages/profile', {
+                user: req.user,
+                profileUser: req.user
+            });
     });
 
     app.get('/profile/:user_name', function (req, res) {
 
-        User.find({name: req.params.user_name})
+        User.findOne({username: req.params.user_name})
             .exec(function (err, user) {
                 if(err)
                     console.log(err);
-                res.render('pages/profile', {
-                    user: user
-                });
+
+                if(req.user && user.username == req.user.username)
+                    res.redirect('/profile');
+                else
+                    res.render('pages/profile', {
+                        user: req.user,
+                        profileUser: user
+                    });
             });
 
     });
