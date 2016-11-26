@@ -12,8 +12,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
+    <script src="/js/services/photosService.js"></script> <!-- load up our controller -->
+    <script src="/js/controllers/photosController.js"></script> <!-- load up our controller -->
+    <script src="/js/photosCore.js"></script>
+
 </head>
-<body>
+<body ng-app="photosCore" ng-controller="photoCtrl">
 
     <header>
         <% include ../partials/nav%>
