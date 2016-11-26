@@ -16,16 +16,22 @@
         <% include ../partials/nav%>
     </header>
 
-    <div id="messageWrapper" class="row small-12 large-centered columns">
-        <ul class="row callout" id="messages"></ul>
-        <form class="row small-12 columns" action="">
-            <div class="input-group">
-                <input class="input-group-field" id="msg" autocomplete="off" type="text">
-                <div class="input-group-button">
-                    <input type="submit" class="button" value="Send">
+    <div class="row">
+        <div id="messageWrapper" class="small-10 columns">
+            <ul class="row callout" id="messages"></ul>
+            <form class="row column" action="">
+                <div class="input-group">
+                    <input class="input-group-field" id="msg" autocomplete="off" type="text">
+                    <div class="input-group-button">
+                        <input type="submit" class="button" value="Send">
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="small-2 columns">
+            <h4>Users Online</h4>
+            <ul id="active-users"></ul>
+        </div>
     </div>
 
     <% include ../partials/scripts%>
