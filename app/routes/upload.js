@@ -45,15 +45,12 @@ module.exports = function (app, multer, ExifImage) {
                         photo.url = url;
 
                         photo.save(function (err) {
-                            // if(err)
-                            //     res.send(err);
-                            // console.log(photo);
-                            res.json(photo);
-                            // else
-                            //     upload(req);
+                            if(err)
+                                console.log(error);
                         });
                     });
                 }
+                return res.json(photo);
             });
         } catch (error) {
             console.log('Error: ' + error.message);
