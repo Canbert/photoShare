@@ -34,29 +34,26 @@ module.exports = function (app, multer, ExifImage) {
 
                         photo.tags.push(result._id);
 
-                        console.log(photo.tags);
+                        photo.name = req.body.name;
+                        photo.user = req.user._id;
+                        photo.price = req.body.price;
+                        photo.data = exifData;
+
+                        var url = req.file.path;
+                        url = url.substring(6,url.length); // remove the "public" part of the url
+
+                        photo.url = url;
+
+                        photo.save(function (err) {
+                            // if(err)
+                            //     res.send(err);
+                            // console.log(photo);
+                            // res.json(photo.toString());
+                            // else
+                            //     upload(req);
+                        });
                     });
                 }
-                console.log(photo.tags);
-
-                photo.name = req.body.name;
-                photo.user = req.user._id;
-                photo.price = req.body.price;
-                photo.data = exifData;
-
-                var url = req.file.path;
-                url = url.substring(6,url.length); // remove the "public" part of the url
-
-                photo.url = url;
-
-                photo.save(function (err) {
-                    if(err)
-                        res.send(err);
-                    console.log(photo);
-                    res.json(photo.toString());
-                    // else
-                    //     upload(req);
-                });
             });
         } catch (error) {
             console.log('Error: ' + error.message);
