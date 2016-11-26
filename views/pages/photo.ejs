@@ -18,15 +18,30 @@
     <header>
         <% include ../partials/nav%>
     </header>
-
-    <div class="row">
-        <div class="medium-8 columns">
-            <img src="<%= photo.url %>">
+    <div style="background: black">
+        <div class="row" >
+            <div class="large-12 large-centered columns">
+                <img class="column" src="<%= photo.url %>">
+            </div>
         </div>
-        <div class="medium-4 columns">
-            <h2><%= photo.name %></h2>
-            <h5><a href=""><%= photo.user.username %></a></h5>
-            <hr>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <h3><%= photo.name %></h3>
+            <a href=""><%= photo.user.username %></a>
+        </div>
+        <div class="small-6 columns">
+            <button class="button expanded float-right">buy</button>
+        </div>
+    </div>
+    <div class="row small-12 columns">
+        <hr>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            h3ello
+        </div>
+        <div class="medium-6 columns">
             <% if(photo.data.length > 0){%>
 
             <ul class="accordion" data-accordion data-allow-all-closed="true">
@@ -59,7 +74,6 @@
             <% } %>
         </div>
     </div>
-
 
     <% include ../partials/scripts%>
 </body>
