@@ -27,7 +27,7 @@ module.exports = function (app, multer, ExifImage) {
 
                 for(var i = 0; i < req.body.tags.length; i++){
 
-                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i]},
+                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i].toLowerCase()},
                         {upsert: true, new: true, setDefaultsOnInsert: true },
                         function(error, result) {
                         if (error) return;

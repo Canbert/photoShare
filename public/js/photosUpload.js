@@ -31,7 +31,7 @@ app.controller('uploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
 
     $scope.addTag = function () {
         if(!isInTags($scope.tag)){
-            $scope.tags.push($scope.tag);
+            $scope.tags.push($scope.tag.toLowerCase());
         }
     };
 
