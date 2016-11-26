@@ -24,7 +24,8 @@
             <img src="<%= photo.url %>">
         </div>
         <div class="medium-4 columns">
-            <h1><%= photo.name %></h1>
+            <h2><%= photo.name %></h2>
+            <h5><a href=""><%= photo.user.username %></a></h5>
             <hr>
             <% if(photo.data.length > 0){%>
 
