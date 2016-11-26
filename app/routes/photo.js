@@ -6,8 +6,6 @@ module.exports = function (app) {
     // =====================================
     app.get('/photo/:photo_id', function (req, res) {
 
-        console.log(req.params.photo_id);
-
         Photo.findById(req.params.photo_id)
             .populate('user','username')
             .exec(function (err, photo) {
@@ -15,6 +13,7 @@ module.exports = function (app) {
                     console.log(err);
                 if(photo)
                     res.render('pages/photo', {
+                        user: req.user,
                         photo: photo
                     });
                 else

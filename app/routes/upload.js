@@ -27,39 +27,30 @@ module.exports = function (app, multer, ExifImage) {
 
                 for(var i = 0; i < req.body.tags.length; i++){
 
-                    var newTag = new Tag();
+                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i].toLowerCase()},
+                        {upsert: true, new: true, setDefaultsOnInsert: true },
+                        function(error, result) {
+                        if (error) return;
 
-                    newTag.name = req.body.tags[i];
+                        photo.tags.push(result._id);
 
-                    photo.tags.push(newTag._id);
+                        photo.name = req.body.name;
+                        photo.user = req.user._id;
+                        photo.price = req.body.price;
+                        photo.data = exifData;
 
+                        var url = req.file.path;
+                        url = url.substring(6,url.length); // remove the "public" part of the url
 
+                        photo.url = url;
 
-                    newTag.save(function (err) {
-                        if (err)
-                            res.send(err);
+                        photo.save(function (err) {
+                            if(err)
+                                console.log(error);
+                        });
                     });
                 }
-                console.log(photo.tags);
-
-                photo.name = req.body.name;
-                photo.user = req.user._id;
-                photo.price = req.body.price;
-                photo.data = exifData;
-
-                var url = req.file.path;
-                url = url.substring(6,url.length); // remove the "public" part of the url
-
-                photo.url = url;
-
-                photo.save(function (err) {
-                    if(err)
-                        res.send(err);
-                    console.log(photo);
-                    res.json(photo.toString());
-                    // else
-                    //     upload(req);
-                });
+                return res.json(photo);
             });
         } catch (error) {
             console.log('Error: ' + error.message);
@@ -103,7 +94,6 @@ module.exports = function (app, multer, ExifImage) {
         }
     });
 }
-
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
