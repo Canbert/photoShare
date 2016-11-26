@@ -20,4 +20,7 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
+    app.get('*', function(req, res){
+        res.status(404).render('pages/404');
+    });
 };
