@@ -1,3 +1,4 @@
+var User = require('../models/user');
 
 module.exports = function (app) {
     // =====================================
@@ -9,6 +10,19 @@ module.exports = function (app) {
         res.render('pages/profile', {
             user: req.user // get the user out of session and pass to template
         });
+    });
+
+    app.get('/profile/:user_name', function (req, res) {
+
+        User.find({name: req.params.user_name})
+            .exec(function (err, user) {
+                if(err)
+                    console.log(err);
+                res.render('pages/profile', {
+                    user: user
+                });
+            });
+
     });
 }
 
