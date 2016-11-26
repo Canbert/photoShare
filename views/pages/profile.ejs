@@ -16,9 +16,19 @@
         <% include ../partials/nav%>
     </header>
 
-    <p class="text-center"><strong>username</strong>: <%= profileUser.username %></p>
-    <p class="text-center"><strong>email</strong>: <%= profileUser.email %></p>
+    <div class="row">
+        <div class="large-12 columns">
+            <h1 class="text-center"><%= profileUser.username %></h1>
+        </div>
+    </div>
 
+    <div class="row small-up-1 medium-up-2 large-up-4">
+        <% for(var i = 0; i < photos.length;i++){%>
+        <div class="column">
+            <a href="/photo/<%= photos[i]._id%>"><img src="<%= photos[i].url%>" class="thumbnail"></a>
+        </div>
+        <% } %>
+    </div>
 
     <% include ../partials/scripts%>
 </body>
