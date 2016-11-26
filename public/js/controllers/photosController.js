@@ -5,7 +5,7 @@ angular.module('photosController', [])
     .controller('photoCtrl', ['$scope','$http','Photos', function($scope, $http, Photos) {
 
         $scope.photo;
-        //
+
         var loc = window.location.pathname;
         var dir = loc.substring(loc.lastIndexOf('/') + 1, loc.length );
 
@@ -13,6 +13,7 @@ angular.module('photosController', [])
             .success(function (data) {
                $scope.photo = data;
                 console.log($scope.photo);
+                console.log($scope.photo.data[0].exif);
             });
 
     }]);

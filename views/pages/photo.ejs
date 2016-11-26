@@ -25,14 +25,14 @@
     <div style="background: black">
         <div class="row" >
             <div class="large-12 large-centered columns">
-                <img class="column" src="<%= photo.url %>">
+                <img class="column" src="{{ photo.url }}">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-6 columns">
-            <h3><%= photo.name %></h3>
-            <a href=""><%= photo.user.username %></a>
+            <h3>{{ photo.name }}</h3>
+            <a href="/profile/{{ photo.user.username}}">{{ photo.user.username}}</a>
         </div>
         <div class="small-6 columns">
             <button class="button expanded float-right">Buy Photo</button>
@@ -45,36 +45,20 @@
         <div class="medium-6 columns">
         </div>
         <div class="medium-6 columns">
-            <% if(photo.data.length > 0){%>
-
             <ul class="accordion" data-accordion data-allow-all-closed="true">
-                <li class="accordion-item" data-accordion-item>
-                    <a href="#" class="accordion-title">Image Data</a>
-                    <%
-                    for(var i = 0; i < photo.data.length;i++){
-                        for(p in photo.data[i].image){%>
-
-                    <div class="accordion-content" data-tab-content><%= p + " - " + photo.data[i].image[p]%></div>
-
-                    <%
-                        }
-                    }
-                    %>
+                <li class="accordion-item" data-accordion-item >
+                    <a href="" class="accordion-title">Image Data</a>
+                    <div class="accordion-content" data-tab-content >
+                        <div g-repeat="data in photo.data[0].exif">
+                            <p>{{ photo.data[0].exif.ColorSpace }}</p>
+                        </div>
+                    </div>
                 </li>
                 <li class="accordion-item" data-accordion-item>
-                    <a href="#" class="accordion-title">EXIF Data</a>
-                    <%
-                    for(var i = 0; i < photo.data.length;i++){
-                            for(p in photo.data[i].exif){%>
-
-                    <div class="accordion-content" data-tab-content><%= p + " - " + photo.data[i].exif[p]%></div>
-                    <%
-                    }
-                    }
-                    %>
+                    <a href="" class="accordion-title">EXIF Data</a>
+                    <div class="accordion-content" data-tab-content></div>
                 </li>
             </ul>
-            <% } %>
         </div>
     </div>
 
