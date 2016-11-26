@@ -27,17 +27,14 @@ module.exports = function (app, multer, ExifImage) {
 
                 for(var i = 0; i < req.body.tags.length; i++){
 
-                    var newTag = new Tag();
+                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i]},
+                        {upsert: true, new: true, setDefaultsOnInsert: true },
+                        function(error, result) {
+                        if (error) return;
 
-                    newTag.name = req.body.tags[i];
+                        photo.tags.push(result._id);
 
-                    photo.tags.push(newTag._id);
-
-
-
-                    newTag.save(function (err) {
-                        if (err)
-                            res.send(err);
+                        console.log(photo.tags);
                     });
                 }
                 console.log(photo.tags);
@@ -103,7 +100,6 @@ module.exports = function (app, multer, ExifImage) {
         }
     });
 }
-
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
