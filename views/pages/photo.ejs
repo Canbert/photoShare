@@ -29,18 +29,17 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="small-6 columns">
-            <h3>{{ photo.name }}</h3>
-            <a href="/profile/{{ photo.user.username}}">{{ photo.user.username}}</a>
+    <div class="row large-12 columns">
+        <div class="row callout">
+            <div class="small-6 columns">
+                <h3>{{ photo.name }}</h3>
+                <a href="/profile/{{ photo.user.username}}">{{ photo.user.username}}</a>
+            </div>
+            <div class="small-6 columns">
+                <p class="text-center">Price: £{{ (photo.price / 100).toFixed(2)}}</p>
+                <button class="button expanded float-right">Buy Photo</button>
+            </div>
         </div>
-        <div class="small-6 columns">
-            <p class="text-center">Price: £{{ (photo.price / 100).toFixed(2)}}</p>
-            <button class="button expanded float-right">Buy Photo</button>
-        </div>
-    </div>
-    <div class="row small-12 columns">
-        <hr>
     </div>
     <div class="row">
         <div class="medium-6 columns">
