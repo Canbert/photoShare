@@ -10,12 +10,6 @@
 
     <link rel="stylesheet" href="/css/photo.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-
-    <script src="/js/services/photosService.js"></script> <!-- load up our controller -->
-    <script src="/js/controllers/photosController.js"></script> <!-- load up our controller -->
-    <script src="/js/photosCore.js"></script>
-
 </head>
 <body ng-app="photosCore" ng-controller="photoCtrl">
 
@@ -37,7 +31,7 @@
             </div>
             <div class="small-6 columns">
                 <p class="text-center">Price: £{{ (photo.price / 100).toFixed(2)}}</p>
-                <button class="button expanded float-right">Buy Photo</button>
+                <button class="button expanded float-right" ng-click="addToCart()"><span class="fi-shopping-cart cart-span">Add to cart</span></button>
             </div>
         </div>
     </div>
@@ -71,5 +65,10 @@
     </div>
 
     <% include ../partials/scripts%>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+    <script src="/js/services/photosService.js"></script> <!-- load up our controller -->
+    <script src="/js/controllers/photosController.js"></script> <!-- load up our controller -->
+    <script src="/js/photosCore.js"></script>
 </body>
 </html>
