@@ -2,7 +2,7 @@
 angular.module('photosController', [])
 
     // inject the Upload service factory into our controller
-    .controller('photoCtrl', ['$scope','$http','Photos', function($scope, $http, Photos) {
+    .controller('photoCtrl', ['$scope','$http','$cookies', 'Photos', function($scope, $http, $cookies, Photos) {
 
         $scope.photo;
 
@@ -14,5 +14,11 @@ angular.module('photosController', [])
                $scope.photo = data;
                 // console.log($scope.photo);
             });
+        
+        $scope.addToCart = function () {
+            // just add the photo id
+            $cookies.putObject('cart',{'photo': $scope.photo._id});
+            console.log("Added: " + $cookies);
+        }
 
     }]);
