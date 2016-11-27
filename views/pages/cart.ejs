@@ -17,11 +17,30 @@
         <% include ../partials/nav%>
     </header>
 
-    <div class="row small-up-1" ng-repeat="photo in photos">
-        <div class="column">
-            <img class="thumbnail" src="{{ photo.url }}">
-        </div>
-    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th width="200">Shopping Cart</th>
+                <th></th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="photo in photos">
+                <td><a href="/photo/{{photo._id}}"><img class="thumbnail" src="{{ photo.url }}"></a></td>
+                <td><a href="/photo/{{photo._id}}">{{ photo.name }}</a></td>
+                <td>£{{ (photo.price / 100).toFixed(2)}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Subtotal: £{{ getTotal() }}</td>
+            </tr>
+        </tfoot>
+    </table>
 
     <% include ../partials/scripts%>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>

@@ -76,4 +76,14 @@ angular.module('photosController', [])
                     $scope.photos.push(data);
                 });
         }
+
+        $scope.getTotal = function () {
+            var total = 0;
+
+            for(var i = 0; i <$scope.photos.length; i++){
+                total += $scope.photos[i].price;
+            }
+
+            return (total / 100).toFixed(2);
+        }
     }]);
