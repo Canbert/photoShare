@@ -12,8 +12,7 @@ angular.module('photosController', [])
         Photos.get(dir)
             .success(function (data) {
                $scope.photo = data;
-                console.log($scope.photo);
-                console.log($scope.photo.data[0].exif);
+                // console.log($scope.photo);
             });
 
     }]);
