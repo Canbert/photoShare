@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>photoShare | Cart</title>
+
+    <link rel="stylesheet" href="/css/photo.css">
+
+</head>
+<body ng-app="photosCore" ng-controller="photoCtrl">
+
+    <header>
+        <% include ../partials/nav%>
+    </header>
+
+
+    <% include ../partials/scripts%>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+    <script src="/js/services/photosService.js"></script> <!-- load up our controller -->
+    <script src="/js/controllers/photosController.js"></script> <!-- load up our controller -->
+    <script src="/js/photosCore.js"></script>
+</body>
+</html>
