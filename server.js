@@ -51,6 +51,7 @@ require('./app/routes/register')(app, passport);
 require('./app/routes/profile')(app);
 require('./app/routes/chat')(app);
 require('./app/routes/photo')(app);
+require('./app/routes/cart')(app);
 require('./app/routes/routes.js')(app, passport); // this needs to be last for it not to 404
 
 
