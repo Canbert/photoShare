@@ -1,8 +1,11 @@
 @import "site.css"; /*imports the site wide stylesheet*/
 
+
+
 .parallax {
+
     /* The image used */
-    background-image: url("/images/parallax-orig.jpg");
+    background-image: url("/images/parallax-large.jpg");
 
     /* Set a specific height */
     min-height: 500px;
@@ -14,4 +17,15 @@
     background-size: cover;
 
     color: white!important;
+}
+
+@media screen and (min-width: 0em){ /* small and up*/
+    .parallax{
+        background-image: url("/images/parallax-large.jpg");
+    }
+}
+@media screen and (min-width: 75em) { /* xlarge */
+    .parallax {
+        background-image: url("/images/parallax-orig.jpg");
+    }
 }
