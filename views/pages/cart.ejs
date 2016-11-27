@@ -24,6 +24,7 @@
                 <th width="200">Shopping Cart</th>
                 <th></th>
                 <th>Price</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                 <td><a href="/photo/{{photo._id}}"><img class="thumbnail" src="{{photo.url}}"></a></td>
                 <td><a href="/photo/{{photo._id}}">{{ photo.name }}</a></td>
                 <td>£{{ (photo.price / 100).toFixed(2)}}</td>
+                <td><button class="alert button" ng-click="removeFromCart(photo._id)">Remove</button></td>
             </tr>
         </tbody>
         <tfoot>
@@ -38,6 +40,7 @@
                 <td></td>
                 <td></td>
                 <td>Subtotal: £{{ getTotal() }}</td>
+                <td></td>
             </tr>
         </tfoot>
     </table>

@@ -62,7 +62,7 @@ angular.module('photosController', [])
 
     }])
 
-    .controller('cartCtrl', ['$scope','$http','$cookies', 'Photos', function($scope, $http, $cookies, Photos) {
+    .controller('cartCtrl', ['$scope','$http','$cookies','$window', 'Photos', function($scope, $http, $cookies, $window, Photos) {
 
         $scope.photos = [];
 
@@ -77,6 +77,35 @@ angular.module('photosController', [])
                         $scope.photos.push(data);
                     });
             }
+        }
+
+        $scope.removeFromCart = function (id) {
+            var cookie = $cookies.get('cart');
+            var cart = JSON.parse(cookie);
+            // console.log(cart);
+
+            for(var i = 0; i < cart.photos.length; i++)
+            {
+                if(cart.photos[i] == id)
+                {
+                    cart.photos.splice(i,1);
+                    break;
+                }
+            }
+
+            var now = new $window.Date(),
+                // this will set the expiration to 1 month
+                exp = new $window.Date(now.getFullYear(), now.getMonth()+1, now.getDate());
+
+            $cookies.putObject('cart',
+                {'photos': cart.photos },
+                {
+                    expires: exp,
+                    path: '/' // sets the cookie to work on any page not just the one it was created on
+                }
+            );
+
+            $window.location.href = '/cart';
         }
 
         $scope.getTotal = function () {
