@@ -12,7 +12,6 @@ angular.module('photosController', [])
         Photos.get(dir)
             .success(function (data) {
                $scope.photo = data;
-                // console.log($scope.photo);
             });
         
         $scope.addToCart = function () {
@@ -25,10 +24,8 @@ angular.module('photosController', [])
 
             // if there is already a cookie set, set the photoIds to the photo array from the cookie
             if($cookies.get('cart')){
-                // console.log("cookie: " + JSON.parse($cookies.get('cart')));
                 var cookie = JSON.parse($cookies.get('cart'));
                 photosIds = cookie.photos;
-                // console.log("Existing array: " + cookie.photos);
 
                 if(!isInArray(photosIds)){
                     photosIds.push($scope.photo._id);
@@ -36,16 +33,10 @@ angular.module('photosController', [])
                 else{
                     alert("Already added");
                 }
-
-                // clear before setting
-                // $cookies.remove('cart');
             }
             else{
-                console.log("No cookie: " + $scope.photo._id);
                 photosIds.push($scope.photo._id);
             }
-
-            console.log("New Cookie Array: " + photosIds);
 
             $cookies.putObject('cart',
                 {'photos': photosIds },
@@ -80,12 +71,9 @@ angular.module('photosController', [])
         var cart = JSON.parse(cookie);
 
         for(var i = 0; i < cart.photos.length ; i++ ){
-            console.log(cart.photos[i]);
             Photos.get(cart.photos[i])
                 .success(function (data) {
                     $scope.photos.push(data);
                 });
         }
-
-        console.log($scope.photos);
     }]);
