@@ -12,8 +12,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
+    <script src="/js/services/photosService.js"></script> <!-- load up our controller -->
+    <script src="/js/controllers/photosController.js"></script> <!-- load up our controller -->
+    <script src="/js/photosCore.js"></script>
+
 </head>
-<body>
+<body ng-app="photosCore" ng-controller="photoCtrl">
 
     <header>
         <% include ../partials/nav%>
@@ -21,16 +25,17 @@
     <div style="background: black">
         <div class="row" >
             <div class="large-12 large-centered columns">
-                <img class="column" src="<%= photo.url %>">
+                <img class="column" src="{{ photo.url }}">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-6 columns">
-            <h3><%= photo.name %></h3>
-            <a href=""><%= photo.user.username %></a>
+            <h3>{{ photo.name }}</h3>
+            <a href="/profile/{{ photo.user.username}}">{{ photo.user.username}}</a>
         </div>
         <div class="small-6 columns">
+            <p class="text-center">Price: £{{ (photo.price / 100).toFixed(2)}}</p>
             <button class="button expanded float-right">Buy Photo</button>
         </div>
     </div>
@@ -39,38 +44,30 @@
     </div>
     <div class="row">
         <div class="medium-6 columns">
+            <h5>Tags</h5>
+            <div ng-repeat="tag in photo.tags">
+                <a>{{ tag.name }}</a>
+            </div>
         </div>
         <div class="medium-6 columns">
-            <% if(photo.data.length > 0){%>
-
             <ul class="accordion" data-accordion data-allow-all-closed="true">
-                <li class="accordion-item" data-accordion-item>
-                    <a href="#" class="accordion-title">Image Data</a>
-                    <%
-                    for(var i = 0; i < photo.data.length;i++){
-                        for(p in photo.data[i].image){%>
-
-                    <div class="accordion-content" data-tab-content><%= p + " - " + photo.data[i].image[p]%></div>
-
-                    <%
-                        }
-                    }
-                    %>
+                <li class="accordion-item" data-accordion-item >
+                    <a href="" class="accordion-title">Image Data</a>
+                    <div class="accordion-content" data-tab-content >
+                        <div ng-repeat="(key, value) in photo.data[0].image">
+                            <p>{{ key }} - {{ value }}</p>
+                        </div>
+                    </div>
                 </li>
                 <li class="accordion-item" data-accordion-item>
-                    <a href="#" class="accordion-title">EXIF Data</a>
-                    <%
-                    for(var i = 0; i < photo.data.length;i++){
-                            for(p in photo.data[i].exif){%>
-
-                    <div class="accordion-content" data-tab-content><%= p + " - " + photo.data[i].exif[p]%></div>
-                    <%
-                    }
-                    }
-                    %>
+                    <a href="" class="accordion-title">EXIF Data</a>
+                    <div class="accordion-content" data-tab-content>
+                        <div ng-repeat="(key, value) in photo.data[0].exif">
+                            <p>{{ key }} - {{ value }}</p>
+                        </div>
+                    </div>
                 </li>
             </ul>
-            <% } %>
         </div>
     </div>
 
