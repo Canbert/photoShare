@@ -17,6 +17,11 @@
         <% include ../partials/nav%>
     </header>
 
+    <div class="row small-up-1" ng-repeat="photo in photos">
+        <div class="column">
+            <img class="thumbnail" src="{{ photo.url }}">
+        </div>
+    </div>
 
     <% include ../partials/scripts%>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
