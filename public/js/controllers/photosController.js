@@ -21,4 +21,9 @@ angular.module('photosController', [])
             console.log("Added: " + $cookies);
         }
 
+    }])
+
+    .controller('cartCtrl', ['$scope','$http','$cookies', 'Photos', function($scope, $http, $cookies, Photos) {
+
+
     }]);
