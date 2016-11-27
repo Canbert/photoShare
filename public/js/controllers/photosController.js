@@ -66,15 +66,17 @@ angular.module('photosController', [])
 
         $scope.photos = [];
 
-        // for some reason a one line declaration doesn't work
-        var cookie = $cookies.get('cart');
-        var cart = JSON.parse(cookie);
+        if($cookies.get('cart')){
+            // for some reason a one line declaration doesn't work
+            var cookie = $cookies.get('cart');
+            var cart = JSON.parse(cookie);
 
-        for(var i = 0; i < cart.photos.length ; i++ ){
-            Photos.get(cart.photos[i])
-                .success(function (data) {
-                    $scope.photos.push(data);
-                });
+            for(var i = 0; i < cart.photos.length ; i++ ){
+                Photos.get(cart.photos[i])
+                    .success(function (data) {
+                        $scope.photos.push(data);
+                    });
+            }
         }
 
         $scope.getTotal = function () {

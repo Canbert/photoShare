@@ -18,7 +18,7 @@
     </header>
 
 
-    <table>
+    <table ng-hide="photos.length == 0">
         <thead>
             <tr>
                 <th width="200">Shopping Cart</th>
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="photo in photos">
-                <td><a href="/photo/{{photo._id}}"><img class="thumbnail" src="{{ photo.url }}"></a></td>
+                <td><a href="/photo/{{photo._id}}"><img class="thumbnail" src="{{photo.url}}"></a></td>
                 <td><a href="/photo/{{photo._id}}">{{ photo.name }}</a></td>
                 <td>£{{ (photo.price / 100).toFixed(2)}}</td>
             </tr>
@@ -41,6 +41,8 @@
             </tr>
         </tfoot>
     </table>
+
+    <h1 class="text-center" ng-hide="photos.length > 0">Your cart is empty.</h1>
 
     <% include ../partials/scripts%>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
