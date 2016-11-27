@@ -30,23 +30,22 @@ angular.module('photosController', [])
                 photosIds = cookie.photos;
                 // console.log("Existing array: " + cookie.photos);
 
-                // check if already added the photo to the cookie
-                for(var i = 0; i < photosIds.length; i++){
-
-                    // add the photo id if its not
-                    if(photosIds[0] != $scope.photo._id){
-                        photosIds.push($scope.photo._id);
-                    }
-                    else
-                        alert("already added!");
+                if(!isInArray(photosIds)){
+                    photosIds.push($scope.photo._id);
+                }
+                else{
+                    alert("Already added");
                 }
 
+                // clear before setting
+                // $cookies.remove('cart');
             }
             else{
+                console.log("No cookie: " + $scope.photo._id);
                 photosIds.push($scope.photo._id);
             }
 
-            // console.log("New Array: " + photosIds);
+            console.log("New Cookie Array: " + photosIds);
 
             $cookies.putObject('cart',
                 {'photos': photosIds },
@@ -55,6 +54,19 @@ angular.module('photosController', [])
                     path: '/' // sets the cookie to work on any page not just the one it was created on
                 }
             );
+        }
+
+        function isInArray(array) {
+
+            // check if already added the photo to the cookie
+            for(var i = 0; i < array.length; i++){
+
+                // add the photo id if its not
+                if(array[i] == $scope.photo._id){
+                    return true;
+                }
+            }
+            return false;
         }
 
     }])
