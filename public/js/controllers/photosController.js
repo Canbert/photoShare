@@ -63,14 +63,13 @@ angular.module('photosController', [])
 
         $scope.photos = [];
 
-        var cart = $cookies.get('cart');
+        // for some reason a one line declaration doesn't work
+        var cookie = $cookies.get('cart');
+        var cart = JSON.parse(cookie);
 
-        console.log(cart);
-
-        // console.log(photo_id);
-
-        for(var i = 0; i < cart; i++ ){
-            Photos.get(cart[i].photo_id)
+        for(var i = 0; i < cart.photos.length ; i++ ){
+            console.log(cart.photos[i]);
+            Photos.get(cart.photos[i])
                 .success(function (data) {
                     $scope.photos.push(data);
                 });
