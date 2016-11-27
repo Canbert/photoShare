@@ -45,6 +45,8 @@ angular.module('photosController', [])
                     path: '/' // sets the cookie to work on any page not just the one it was created on
                 }
             );
+
+            $window.location.href = '/cart';
         }
 
         function isInArray(array) {
