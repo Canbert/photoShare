@@ -4,9 +4,9 @@ if($.cookie('cart')){
     var cart = JSON.parse($.cookie('cart'));
     var cartItems = cart.photos.length;
 
-    $('.fi-shopping-cart').html(cartItems);
+    $('.top-bar .fi-shopping-cart').html(cartItems);
 }
 else{
-    $('.fi-shopping-cart').html(0);
+    $('.top-bar .fi-shopping-cart').html(0);
 }
 
