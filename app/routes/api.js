@@ -35,6 +35,26 @@ module.exports = function (app) {
             });
     });
 
+
+    app.put('/api/photos/:photo_id', function (req, res) {
+        Photo.findById(req.params.photo_id)
+            .populate('user','username')
+            .populate('tags','name')
+            .exec( function (err, photo) {
+                if(err)
+                    res.send(err);
+
+                photo.name = "test";
+
+                photo.save(function(err) {
+                    if (err)
+                        res.send(err);
+
+                    res.json({ message: 'photo updated!' });
+                });
+            });
+    });
+
     // =====================================
     // API TAGS ================================
     // =====================================
