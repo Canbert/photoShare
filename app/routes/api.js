@@ -66,6 +66,16 @@ module.exports = function (app) {
             });
     });
 
+    app.delete('/api/photos/:photo_id', function (req, res) {
+        Photo.remove({
+            _id: req.params.photo_id
+        }, function(err, photo) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'You deleted the photo'});
+        });
+    });
+
     // =====================================
     // API TAGS ================================
     // =====================================
