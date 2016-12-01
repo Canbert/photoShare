@@ -133,26 +133,30 @@ module.exports = function (app, multer, ExifImage) {
 
     // get all users
     app.get('/api/users',function (req, res) {
-        User.find({})
-            .exec(function (err, users) {
 
-                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-                if (err) {
-                    res.send(err);
-                }
+        var query = User.find();
+        query.select('-password');
 
-                res.json(users); // return all photos in JSON format
-            });
+        myQuery.exec(function (err, users) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err) {
+                res.send(err);
+            }
+            res.json(users); // return all photos in JSON format
+        });
     });
 
     // get one user based on the id
     app.get('/api/users/:user_id', function (req, res) {
-        Tag.findById(req.params.user_id)
-            .exec( function (err, user) {
-                if(err)
-                    res.send(err);
-                res.json(user);
-            });
+
+        var query = User.findById(req.params.user_id);
+        query.select('-password');
+
+        query.exec( function (err, user) {
+            if(err)
+                res.send(err);
+            res.json(user);
+        });
     });
 
 
