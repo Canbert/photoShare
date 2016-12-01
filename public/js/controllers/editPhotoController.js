@@ -39,7 +39,7 @@ angular.module('editPhotoController', [])
         };
 
         function addTag(tag) {
-            if(!isInTags(tag)){
+            if(!isInTags(tag) && tag.length > 0){
                 $scope.tags.push(tag);
             }
         }
