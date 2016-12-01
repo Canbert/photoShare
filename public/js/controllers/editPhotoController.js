@@ -8,6 +8,10 @@ angular.module('editPhotoController', [])
         $scope.image = $scope.photo.url;
         $scope.tags = [];
 
+        for(var i = 0; i <$scope.photo.tags.length; i++){
+            $scope.tags.push($scope.photo.tags[i].name);
+        }
+
         // ng-file-upload later on form submit or something similar
         $scope.submit = function() {
             if ($scope.form.file.$valid && $scope.file) {

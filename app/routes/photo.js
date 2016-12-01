@@ -26,6 +26,7 @@ module.exports = function (app) {
 
         Photo.findById(req.params.photo_id)
             .populate('user','username')
+            .populate('tags','name')
             .exec(function (err, photo) {
                 if(err)
                     console.log(err);
