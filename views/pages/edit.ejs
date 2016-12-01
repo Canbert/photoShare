@@ -35,6 +35,8 @@
 
                 <img class="previewImage" src="{{image}}">
 
+                <div ng-bind-html="errors"></div>
+
                 <div class="input-group">
                     <label class="input-group-label">Name</label>
                     <input class="input-group-field" type="text" ng-model="name" ng-required="name" value="{{name}}">

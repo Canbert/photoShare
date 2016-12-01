@@ -44,16 +44,25 @@ module.exports = function (app) {
                 if(err)
                     res.send(err);
 
-                photo.name = req.body.name;
-                // photo.tags = req.body.tags;
-                photo.price = req.body.price;
+                for(var i = 0; i < req.body.tags.length; i++) {
+                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i].toLowerCase()},
+                        {upsert: true, new: true, setDefaultsOnInsert: true},
+                        function (error, result) {
+                            if (error) return;
 
-                photo.save(function(err) {
-                    if (err)
-                        res.send(err);
+                            photo.tags.push(result._id);
 
-                    res.json({ message: 'photo updated!' });
-                });
+                            photo.name = req.body.name;
+                            photo.price = req.body.price;
+
+                            photo.save(function (err) {
+                                if (err)
+                                    console.log(error);
+
+                                res.json({message: 'photo updated'});
+                            });
+                        });
+                }
             });
     });
 
