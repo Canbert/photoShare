@@ -29,13 +29,16 @@ module.exports = function (app) {
             .exec(function (err, photo) {
                 if(err)
                     console.log(err);
-                if(photo)
+
+                if(photo && req.user &&
+                    (photo.user._id.toString() == req.user._id.toString()  || req.user.privilege == 2))
                     res.render('pages/edit', {
                         user: req.user,
                         photo: photo
                     });
-                else
-                    res.redirect("/");
+                else{
+                    res.redirect("/photo/" + req.params.photo_id);
+                }
             });
 
     });
