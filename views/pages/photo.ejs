@@ -26,7 +26,12 @@
     <div class="row large-12 columns">
         <div class="row callout">
             <div class="small-6 columns">
-                <h3>{{ photo.name }}<a class="small button alert" href="{{ photo._id }}/edit/">Edit Photo</a></h3>
+                <h3>{{ photo.name }}
+                    <% if(typeof user !== "undefined"
+                    && (photo.user._id.toString() == user._id.toString() || user.privilege == 2)){ %>
+                    <a class="small button alert" href="{{ photo._id }}/edit/">Edit Photo</a>
+                    <% } %>
+                </h3>
                 <a href="/profile/{{ photo.user.username}}">{{ photo.user.username}}</a>
             </div>
             <div class="small-6 columns">
