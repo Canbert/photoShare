@@ -1,1 +1,1 @@
-var app = angular.module('photoEdit', ['photosService', 'editPhotoController']);
+var app = angular.module('photoEdit', ['photosService', 'editPhotoController', 'tagsService']);
