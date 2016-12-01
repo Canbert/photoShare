@@ -10,8 +10,8 @@ angular.module('photosService', [])
             get : function (id) {
                 return $http.get('/api/photos/' + id);
             },
-            update: function (id, photoData) {
-                return $http.patch('/api/photos/' + id, photoData);
+            put: function (id, photoData) {
+                return $http.put('/api/photos/' + id, photoData);
             },
             create : function(photoData) {
                 return $http.post('/api/photos', photoData);
