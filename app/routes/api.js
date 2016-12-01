@@ -44,7 +44,9 @@ module.exports = function (app) {
                 if(err)
                     res.send(err);
 
-                photo.name = "test";
+                photo.name = req.body.name;
+                // photo.tags = req.body.tags;
+                photo.price = req.body.price;
 
                 photo.save(function(err) {
                     if (err)

@@ -14,21 +14,16 @@ angular.module('editPhotoController', [])
 
         // ng-file-upload later on form submit or something similar
         $scope.submit = function() {
-            if ($scope.form.file.$valid && $scope.file) {
-                if($scope.name != null) {
-                    if ($scope.tags.length > 0) {
-                        Photos.update()
-                    }
-                    else {
-                        addError("Needs at least one tag.")
-                    }
+            if($scope.name != null) {
+                if ($scope.tags.length > 0) {
+                    Photos.put($scope.photo._id,{name: $scope.name, price: $scope.price})
                 }
-                else{
-                    addError("Needs at name.");
+                else {
+                    addError("Needs at least one tag.")
                 }
             }
             else{
-                addError("Please select a photo.");
+                addError("Needs at name.");
             }
         };
 
