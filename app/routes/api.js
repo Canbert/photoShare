@@ -58,7 +58,7 @@ module.exports = function (app) {
     });
 
     // get one photo based on the id
-    app.get('/api/photos/:photo_id', function (req, res) {
+    app.get('/api/tags/:tag_id', function (req, res) {
         Tag.findById(req.params.tag_id)
             .exec( function (err, tag) {
                 if(err)
