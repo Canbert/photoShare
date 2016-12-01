@@ -1,10 +1,12 @@
 angular.module('editPhotoController', [])
-    .controller('editCtrl', ['$scope', '$sce','$window', 'Photos', function ($scope, $sce, $window, Photos) {
+    .controller('editCtrl', ['$scope', '$sce','$window', 'Photos','Tags', function ($scope, $sce, $window, Photos, Tags) {
 
         $scope.errors = "";
-        $scope.tags = $window.tags;
-
-        console.log($scope.tags);
+        $scope.photo = $window.photo;
+        $scope.name = $scope.photo.name;
+        $scope.price = $scope.photo.price;
+        $scope.image = $scope.photo.url;
+        $scope.tags = [];
 
         // ng-file-upload later on form submit or something similar
         $scope.submit = function() {

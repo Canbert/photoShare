@@ -10,10 +10,12 @@
 
     <link rel="stylesheet" href="/css/upload.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
 
-    <script src="/js/services/photosService.js"></script> <!-- load up our controller -->
-    <script src="/js/photosEdit.js"></script>
+    <script src="/js/services/photosService.js"></script>
+    <script src="/js/services/tagsService.js"></script>
+    <script src="/js/controllers/editPhotoController.js"></script> <!-- load up our controller -->
+    <script src="/js/photoEdit.js"></script>
 
 </head>
 <body>
@@ -21,14 +23,21 @@
         <% include ../partials/nav%>
     </header>
 
+    <script>
+        var photo =<%-JSON.stringify(photo);%>
+    </script>
+
     <div class="row">
         <div class="medium-12 columns">
             <form ng-app="photoEdit" ng-controller="editCtrl" name="form" class="callout">
                 <h1 class="text-center">Edit photo</h1>
 
+
+                <img class="previewImage" src="{{image}}">
+
                 <div class="input-group">
                     <label class="input-group-label">Name</label>
-                    <input class="input-group-field" type="text" ng-model="name" ng-required="name">
+                    <input class="input-group-field" type="text" ng-model="name" ng-required="name" value="{{name}}">
                 </div>
 
                 <div ng-repeat="tag in tags">
@@ -49,7 +58,7 @@
 
                 <div class="input-group">
                     <label class="input-group-label" >£</label>
-                    <input class="input-group-field" ng-model="price" type="number" min="0.00" step="0.01" value="00.00"/>
+                    <input class="input-group-field" ng-model="price" type="number" min="0.00" step="0.01" value="{{price}}"/>
                 </div>
             </form>
         </div>
