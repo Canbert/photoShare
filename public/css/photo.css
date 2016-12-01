@@ -7,3 +7,8 @@
 .cart-span{
     font-size: 2em;
 }
+
+.tags{
+    display: inline-block;
+    margin-right: 0.5em;
+}
