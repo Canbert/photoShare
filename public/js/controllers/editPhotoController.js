@@ -8,8 +8,6 @@ angular.module('editPhotoController', [])
         $scope.image = $scope.photo.url;
         $scope.tags = [];
 
-        console.log($scope.photo.tags);
-
         for(var i = 0; i <$scope.photo.tags.length; i++){
             addTag($scope.photo.tags[i].name);
         }
@@ -28,6 +26,10 @@ angular.module('editPhotoController', [])
                 addError("Needs at name.");
             }
         };
+
+        $scope.delete = function () {
+            Photos.delete($scope.photo._id);
+        }
 
         $scope.addTag = function () {
             addTag($scope.tag);
