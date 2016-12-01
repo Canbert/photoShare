@@ -1,5 +1,6 @@
 var Photo = require('../models/photo');
 var Tag = require('../models/tag');
+var User = require('../models/user');
 
 module.exports = function (app, multer, ExifImage) {
 
@@ -127,6 +128,35 @@ module.exports = function (app, multer, ExifImage) {
     });
 
     // =====================================
+    // API USERS ================================
+    // =====================================
+
+    // get all users
+    app.get('/api/users',function (req, res) {
+        User.find({})
+            .exec(function (err, users) {
+
+                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(users); // return all photos in JSON format
+            });
+    });
+
+    // get one user based on the id
+    app.get('/api/users/:user_id', function (req, res) {
+        Tag.findById(req.params.user_id)
+            .exec( function (err, user) {
+                if(err)
+                    res.send(err);
+                res.json(user);
+            });
+    });
+
+
+    // =====================================
     // API TAGS ================================
     // =====================================
 
@@ -134,7 +164,7 @@ module.exports = function (app, multer, ExifImage) {
 
     });
 
-    // get all photos
+    // get all tags
     app.get('/api/tags', function (req, res) {
         Tag.find({})
             .exec(function (err, tags) {
@@ -148,7 +178,7 @@ module.exports = function (app, multer, ExifImage) {
             });
     });
 
-    // get one photo based on the id
+    // get one tag based on the id
     app.get('/api/tags/:tag_id', function (req, res) {
         Tag.findById(req.params.tag_id)
             .exec( function (err, tag) {
