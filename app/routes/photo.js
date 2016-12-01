@@ -21,4 +21,22 @@ module.exports = function (app) {
         });
 
     });
+
+    app.get('/photo/:photo_id/edit', function (req, res) {
+
+        Photo.findById(req.params.photo_id)
+            .populate('user','username')
+            .exec(function (err, photo) {
+                if(err)
+                    console.log(err);
+                if(photo)
+                    res.render('pages/edit', {
+                        user: req.user,
+                        photo: photo
+                    });
+                else
+                    res.redirect("/");
+            });
+
+    });
 }
