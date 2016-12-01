@@ -57,34 +57,6 @@ module.exports = function (app, multer, ExifImage) {
         }
     });
 
-    // get all photos
-    app.get('/api/photos', function (req, res) {
-        Photo.find({})
-            .populate('user','username')
-            .populate('tags','name')
-            .exec(function (err, photos) {
-
-            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-            if (err) {
-                res.send(err);
-            }
-
-            res.json(photos); // return all photos in JSON format
-        });
-    });
-
-    // get one photo based on the id
-    app.get('/api/photos/:photo_id', function (req, res) {
-        Photo.findById(req.params.photo_id)
-            .populate('user','username')
-            .populate('tags','name')
-            .exec( function (err, photo) {
-            if(err)
-                res.send(err);
-            res.send(photo);
-        });
-    });
-
     app.get('/upload', isLoggedIn, function (req, res) {
         if(req.user.privilege >= 1){
             res.render('pages/upload', {
