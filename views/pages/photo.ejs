@@ -26,7 +26,12 @@
     <div class="row large-12 columns">
         <div class="row callout">
             <div class="small-6 columns">
-                <h3>{{ photo.name }}</h3>
+                <h3>{{ photo.name }}
+                    <% if(typeof user !== "undefined"
+                    && (photo.user._id.toString() == user._id.toString() || user.privilege == 2)){ %>
+                    <a class="small button alert" href="{{ photo._id }}/edit/">Edit Photo</a>
+                    <% } %>
+                </h3>
                 <a href="/profile/{{ photo.user.username}}">{{ photo.user.username}}</a>
             </div>
             <div class="small-6 columns">
@@ -38,7 +43,7 @@
     <div class="row">
         <div class="medium-6 columns">
             <h5>Tags</h5>
-            <div ng-repeat="tag in photo.tags">
+            <div class="tags" ng-repeat="tag in photo.tags">
                 <a href="" class="small hollow button">{{ tag.name }}</a>
             </div>
         </div>

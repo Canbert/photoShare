@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>photoShare | Edit</title>
+
+    <link rel="stylesheet" href="/css/upload.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+
+    <script src="/js/services/photosService.js"></script>
+    <script src="/js/services/tagsService.js"></script>
+    <script src="/js/controllers/editPhotoController.js"></script> <!-- load up our controller -->
+    <script src="/js/photoEdit.js"></script>
+
+</head>
+<body>
+    <header>
+        <% include ../partials/nav%>
+    </header>
+
+    <script>
+        var photo =<%-JSON.stringify(photo);%>
+    </script>
+
+    <div class="row">
+        <div class="medium-12 columns">
+            <form ng-app="photoEdit" ng-controller="editCtrl" name="form" class="callout">
+                <h1 class="text-center">Edit photo
+                    <a class="button alert" data-toggle="deleteModal" type="button">Delete Photo</a>
+                </h1>
+
+                <div class="reveal warning" id="deleteModal" data-reveal data-overlay="false">
+                    <h3>Are you sure you want to delete this?</h3>
+                    <div class="input-group">
+                        <div class="input-group-button">
+                            <button class="button" ng-click="delete()" >Yes</button>
+                        </div>
+                        <div class="input-group-button">
+                            <button class="button" data-close aria-label="Close reveal">No</button>
+                        </div>
+                    </div>
+                    <button class="close-button" data-close aria-label="Close reveal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <img class="previewImage" src="{{image}}">
+
+                <div ng-bind-html="errors"></div>
+
+                <div class="input-group">
+                    <label class="input-group-label">Name</label>
+                    <input class="input-group-field" type="text" ng-model="name" ng-required="name" value="{{name}}">
+                </div>
+
+                <div ng-repeat="tag in tags">
+                    <div class="small-1 column callout" data-closable>
+                        <p> {{tag}} </p>
+                        <button class="close-button" aria-label="Dismiss alert" type="button" ng-click="removeTag(tag)" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <input class="input-group-field" type="text" ng-model="tag">
+                    <div class="input-group-button">
+                        <button class="button" ng-click="addTag()">Add Tag</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label" >£</label>
+                    <input class="input-group-field" ng-model="price" type="number" min="0.00" step="0.01" value="{{price}}"/>
+                </div>
+
+                <input class="button expanded" type="button" ng-click="submit()" value="Update">
+            </form>
+        </div>
+    </div>
+
+    <% include ../partials/scripts%>
+</body>
+</html>
