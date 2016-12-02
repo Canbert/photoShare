@@ -12,11 +12,13 @@ angular.module('homePhotosController', [])
             });
 
         $scope.$watch('search', function () {
-            Photos.search($scope.search)
-                .success(function (data) {
-                    $scope.photos = data;
-                    console.log(data);
-                });
+            if($scope.search != undefined){
+                Photos.search($scope.search)
+                    .success(function (data) {
+                        $scope.photos = data;
+                        console.log(data);
+                    });
+            }
         });
 
     }])
