@@ -173,6 +173,17 @@ module.exports = function (app, multer, ExifImage) {
         });
     });
 
+    app.put('/api/users/:user_id', function (req, res) {
+        User.findOneAndUpdate(req.params.user_id)
+            .exec( function (err, user) {
+                if(err)
+                    res.send(err);
+
+                user.privilege = req.body.privilege;
+
+            })
+    });
+
 
     // =====================================
     // API TAGS ================================
