@@ -4,7 +4,7 @@ angular.module('editPhotoController', [])
         $scope.errors = "";
         $scope.photo = $window.photo;
         $scope.name = $scope.photo.name;
-        $scope.price = $scope.photo.price;
+        $scope.price = ($scope.photo.price / 100).toFixed(2);
         $scope.image = $scope.photo.url;
         $scope.tags = [];
 
