@@ -75,9 +75,9 @@ module.exports = function (app, multer, ExifImage) {
     app.get('/api/photos', function (req, res) {
 
         if(req.query){
-            var name = req.query.name;
+            var query = req.query.q;
 
-            Photo.find({name: new RegExp(name, "i") })
+            Photo.find({name: new RegExp(query, "i") })
                 .populate('user','username')
                 .populate('tags','name')
                 .exec(function (err, photos) {
