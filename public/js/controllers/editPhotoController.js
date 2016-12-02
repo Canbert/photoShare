@@ -4,7 +4,7 @@ angular.module('editPhotoController', [])
         $scope.errors = "";
         $scope.photo = $window.photo;
         $scope.name = $scope.photo.name;
-        $scope.price = $scope.photo.price;
+        $scope.price = ($scope.photo.price / 100).toFixed(2);
         $scope.image = $scope.photo.url;
         $scope.tags = [];
 
@@ -28,7 +28,14 @@ angular.module('editPhotoController', [])
         };
 
         $scope.delete = function () {
-            Photos.delete($scope.photo._id);
+            if(confirm("Are you sure you want to delete this?")){
+                Photos.delete($scope.photo._id)
+                    .then(function (resp) {
+                        $window.location.href = '/';
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    });
+            }
         }
 
         $scope.addTag = function () {
