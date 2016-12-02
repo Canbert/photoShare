@@ -73,18 +73,38 @@ module.exports = function (app, multer, ExifImage) {
 
     // get all photos
     app.get('/api/photos', function (req, res) {
-        Photo.find({})
-            .populate('user','username')
-            .populate('tags','name')
-            .exec(function (err, photos) {
 
-                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-                if (err) {
-                    res.send(err);
-                }
+        if(req.query){
+            var query = req.query.q;
 
-                res.json(photos); // return all photos in JSON format
-            });
+            Photo.find({name: new RegExp(query, "i") })
+                .populate('user','username')
+                .populate('tags','name')
+                .exec(function (err, photos) {
+
+                    // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    res.json(photos); // return all photos in JSON format
+                });
+        }
+        else {
+
+            Photo.find({})
+                .populate('user', 'username')
+                .populate('tags', 'name')
+                .exec(function (err, photos) {
+
+                    // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    res.json(photos); // return all photos in JSON format
+                });
+        }
     });
 
     // get one photo based on the id
@@ -226,5 +246,4 @@ module.exports = function (app, multer, ExifImage) {
                 res.send(tag);
             });
     });
-
 }

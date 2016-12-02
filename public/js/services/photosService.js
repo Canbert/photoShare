@@ -10,6 +10,9 @@ angular.module('photosService', [])
             getOne: function (id) {
                 return $http.get('/api/photos/' + id);
             },
+            search: function (query) {
+                return $http.get('/api/photos?q=' + query);
+            },
             put: function (id, photoData) {
                 return $http.put('/api/photos/' + id, photoData);
             },
