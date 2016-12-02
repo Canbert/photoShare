@@ -22,19 +22,19 @@
             <tr>
                 <th>User</th>
                 <th>Privilege</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="user in users">
                 <td>{{ user.username }}</td>
                 <td>
-                    <select ng-init="somethingHere = options[user.privilege]"
-                            ng-model="somethingHere"
-                            ng-options="option.name for option in options">
+                    <select ng-init="optionPrivilege = options[user.privilege]"
+                            ng-model="optionPrivilege"
+                            ng-options="option.name for option in options track by option.id"
+                            ng-change="updatePrivilege(user._id, optionPrivilege.id)"
+                    >
                     </select>
                 </td>
-                <td><button class="button" ng-click="">Update User</button></td>
             </tr>
         </tbody>
     </table>

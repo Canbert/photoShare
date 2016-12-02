@@ -174,12 +174,22 @@ module.exports = function (app, multer, ExifImage) {
     });
 
     app.put('/api/users/:user_id', function (req, res) {
-        User.findOneAndUpdate(req.params.user_id)
-            .exec( function (err, user) {
+
+        var query = User.findById(req.params.user_id);
+        query.select('-password');
+
+        query.exec( function (err, user) {
                 if(err)
                     res.send(err);
 
                 user.privilege = req.body.privilege;
+
+                user.save(function (err) {
+                    if (err)
+                        console.log(error);
+
+                    res.json({message: 'user updated'});
+                });
 
             })
     });
