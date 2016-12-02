@@ -6,7 +6,7 @@ angular.module('homePhotosController', [])
 
         $scope.photos;
 
-        Photos.get(dir)
+        Photos.get()
             .success(function (data) {
                 $scope.photos = data;
             });
