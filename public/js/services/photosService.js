@@ -7,7 +7,7 @@ angular.module('photosService', [])
             get : function() {
                 return $http.get('/api/photos');
             },
-            get : function (id) {
+            getOne: function (id) {
                 return $http.get('/api/photos/' + id);
             },
             put: function (id, photoData) {
