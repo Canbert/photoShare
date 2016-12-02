@@ -1,6 +1,7 @@
 var Photo = require('../models/photo');
 var Tag = require('../models/tag');
 var User = require('../models/user');
+var escape = require('../htmlescape');
 
 module.exports = function (app, multer, ExifImage) {
 
@@ -48,7 +49,7 @@ module.exports = function (app, multer, ExifImage) {
 
                             photo.tags.push(result._id);
 
-                            photo.name = req.body.name;
+                            photo.name = escape.escapeHtml(req.body.name);
                             photo.user = req.user._id;
                             photo.price = req.body.price;
                             photo.data = exifData;
