@@ -7,7 +7,7 @@ angular.module('tagsService', [])
             get : function() {
                 return $http.get('/api/tags');
             },
-            get : function (id) {
+            getOne : function (id) {
                 return $http.get('/api/tags/' + id);
             },
             update: function (id, tagData) {

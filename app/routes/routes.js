@@ -7,7 +7,7 @@ module.exports = function (app) {
     // =====================================
     app.get('/', function (req, res) {
         // user required for the navbar
-        res.render('pages/index',{
+        res.render('pages/home',{
             user:req.user // get the user out of session and pass to template
         });
     });
