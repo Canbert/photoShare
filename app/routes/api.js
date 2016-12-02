@@ -1,11 +1,75 @@
 var Photo = require('../models/photo');
 var Tag = require('../models/tag');
+var User = require('../models/user');
 
-module.exports = function (app) {
+module.exports = function (app, multer, ExifImage) {
+
+    app.get('/api', function (req, res) {
+
+        var routes = {
+            photos: '/api/photos',
+            tags: '/api/tags',
+            user: '/api/users'
+        }
+
+        return res.json(routes);
+
+    });
+
 
     // =====================================
     // API PHOTOS ================================
     // =====================================
+
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/uploads/')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now())
+        }
+    });
+
+    var upload = multer({storage: storage});
+
+    app.post('/api/photos',upload.single('file'), function (req, res) {
+
+        try {
+            new ExifImage({ image : req.file.path }, function (error, exifData) {
+
+                var photo = new Photo();
+
+                for(var i = 0; i < req.body.tags.length; i++){
+
+                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i].toLowerCase()},
+                        {upsert: true, new: true, setDefaultsOnInsert: true },
+                        function(error, result) {
+                            if (error) return;
+
+                            photo.tags.push(result._id);
+
+                            photo.name = req.body.name;
+                            photo.user = req.user._id;
+                            photo.price = req.body.price;
+                            photo.data = exifData;
+
+                            var url = req.file.path;
+                            url = url.substring(6,url.length); // remove the "public" part of the url
+
+                            photo.url = url;
+
+                            photo.save(function (err) {
+                                if(err)
+                                    console.log(error);
+                            });
+                        });
+                }
+                return res.json(photo);
+            });
+        } catch (error) {
+            console.log('Error: ' + error.message);
+        }
+    });
 
     // get all photos
     app.get('/api/photos', function (req, res) {
@@ -77,6 +141,39 @@ module.exports = function (app) {
     });
 
     // =====================================
+    // API USERS ================================
+    // =====================================
+
+    // get all users
+    app.get('/api/users',function (req, res) {
+
+        var query = User.find();
+        query.select('-password');
+
+        myQuery.exec(function (err, users) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err) {
+                res.send(err);
+            }
+            res.json(users); // return all photos in JSON format
+        });
+    });
+
+    // get one user based on the id
+    app.get('/api/users/:user_id', function (req, res) {
+
+        var query = User.findById(req.params.user_id);
+        query.select('-password');
+
+        query.exec( function (err, user) {
+            if(err)
+                res.send(err);
+            res.json(user);
+        });
+    });
+
+
+    // =====================================
     // API TAGS ================================
     // =====================================
 
@@ -84,7 +181,7 @@ module.exports = function (app) {
 
     });
 
-    // get all photos
+    // get all tags
     app.get('/api/tags', function (req, res) {
         Tag.find({})
             .exec(function (err, tags) {
@@ -98,7 +195,7 @@ module.exports = function (app) {
             });
     });
 
-    // get one photo based on the id
+    // get one tag based on the id
     app.get('/api/tags/:tag_id', function (req, res) {
         Tag.findById(req.params.tag_id)
             .exec( function (err, tag) {

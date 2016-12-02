@@ -44,9 +44,9 @@ app.set('json spaces', 2);
 require('./app/chat.js')(io);
 
 // routing ========================
-require('./app/routes/api')(app);
+require('./app/routes/api')(app, multer, ExifImage);
 require('./app/routes/admin')(app,mongoose);
-require('./app/routes/upload')(app, multer, ExifImage);
+require('./app/routes/upload')(app);
 require('./app/routes/login')(app, passport);
 require('./app/routes/register')(app, passport);
 require('./app/routes/profile')(app);
