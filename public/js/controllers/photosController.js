@@ -74,7 +74,7 @@ angular.module('photosController', [])
             var cart = JSON.parse(cookie);
 
             for(var i = 0; i < cart.photos.length ; i++ ){
-                Photos.get(cart.photos[i])
+                Photos.getOne(cart.photos[i])
                     .success(function (data) {
                         $scope.photos.push(data);
                     });
