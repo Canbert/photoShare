@@ -30,7 +30,6 @@ angular.module('editPhotoController', [])
         $scope.delete = function () {
             if(confirm("Are you sure you want to delete this?")){
                 Photos.delete($scope.photo._id);
-                $window.location.href = "/profile";
             }
         }
 

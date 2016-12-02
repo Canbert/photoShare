@@ -30,7 +30,9 @@
     <div class="row">
         <div class="medium-12 columns">
             <form ng-app="photoEdit" ng-controller="editCtrl" name="form" class="callout">
-                <h1 class="text-center">Edit photo
+                <h1 class="text-center">
+                    <a class="button" type="button" href="/photo/{{photo._id}}">Go Back</a>
+                    Edit photo
                     <a class="button alert" ng-click="delete()" type="button">Delete Photo</a>
                 </h1>
 
