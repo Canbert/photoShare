@@ -150,7 +150,7 @@ module.exports = function (app, multer, ExifImage) {
         var query = User.find();
         query.select('-password');
 
-        myQuery.exec(function (err, users) {
+        query.exec(function (err, users) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err) {
                 res.send(err);
@@ -168,7 +168,8 @@ module.exports = function (app, multer, ExifImage) {
         query.exec( function (err, user) {
             if(err)
                 res.send(err);
-            res.json(user);
+            else
+                res.json(user);
         });
     });
 
