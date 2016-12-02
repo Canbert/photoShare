@@ -9,7 +9,7 @@ angular.module('photosController', [])
         var loc = window.location.pathname;
         var dir = loc.substring(loc.lastIndexOf('/') + 1, loc.length );
 
-        Photos.get(dir)
+        Photos.getOne(dir)
             .success(function (data) {
                $scope.photo = data;
             });
