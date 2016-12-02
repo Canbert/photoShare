@@ -8,7 +8,7 @@ angular.module('homePhotosController', [])
 
         Photos.get()
             .success(function (data) {
-                $scope.photos = data;
+                $scope.photos = data.splice(0,9);
             });
 
     }])
