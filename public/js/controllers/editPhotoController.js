@@ -29,7 +29,12 @@ angular.module('editPhotoController', [])
 
         $scope.delete = function () {
             if(confirm("Are you sure you want to delete this?")){
-                Photos.delete($scope.photo._id);
+                Photos.delete($scope.photo._id)
+                    .then(function (resp) {
+                        $window.location.href = '/';
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    });
             }
         }
 
