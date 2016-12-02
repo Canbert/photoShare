@@ -123,7 +123,7 @@ module.exports = function (app, multer, ExifImage) {
                                 if (err)
                                     console.log(error);
 
-                                res.json({message: 'photo updated'});
+                                // res.json({message: 'photo updated'});
                             });
                         });
                 }
