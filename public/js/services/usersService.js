@@ -7,7 +7,7 @@ angular.module('usersService', [])
             get : function() {
                 return $http.get('/api/users');
             },
-            get : function (id) {
+            getOne : function (id) {
                 return $http.get('/api/users/' + id);
             },
             put: function (id, userData) {
