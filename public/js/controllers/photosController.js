@@ -120,9 +120,3 @@ angular.module('photosController', [])
             return (total / 100).toFixed(2);
         }
     }])
-
-    .controller('searchCtrl', ['$scope','$http','$window', 'Photos', function($scope, $http, $window, Photos) {
-
-
-
-    }]);

@@ -11,4 +11,12 @@ angular.module('homePhotosController', [])
                 $scope.photos = data.splice(0,9);
             });
 
+        $scope.$watch('search', function () {
+            Photos.search($scope.search)
+                .success(function (data) {
+                    $scope.photos = data;
+                    console.log(data);
+                });
+        });
+
     }])

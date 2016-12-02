@@ -45,7 +45,6 @@ require('./app/chat.js')(io);
 
 // routing ========================
 require('./app/routes/api')(app, multer, ExifImage);
-require('./app/routes/search')(app);
 require('./app/routes/admin')(app,mongoose);
 require('./app/routes/upload')(app);
 require('./app/routes/login')(app, passport);
