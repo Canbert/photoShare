@@ -4,6 +4,19 @@ var User = require('../models/user');
 
 module.exports = function (app, multer, ExifImage) {
 
+    app.get('/api', function (req, res) {
+
+        var routes = {
+            photos: '/api/photos',
+            tags: '/api/tags',
+            user: '/api/users'
+        }
+
+        return res.json(routes);
+
+    });
+
+
     // =====================================
     // API PHOTOS ================================
     // =====================================
