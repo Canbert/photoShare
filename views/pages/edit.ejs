@@ -48,16 +48,16 @@
                 <div ng-repeat="tag in tags">
                     <div class="small-1 column callout" data-closable>
                         <p> {{tag}} </p>
-                        <button class="close-button" aria-label="Dismiss alert" type="button" ng-click="removeTag(tag)" data-close>
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <!--<button class="close-button" aria-label="Dismiss alert" type="button" ng-click="removeTag(tag)" data-close>-->
+                            <!--<span aria-hidden="true">&times;</span>-->
+                        <!--</button>-->
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <input class="input-group-field" type="text" ng-model="tag">
+                <div class="input-group disabled">
+                    <input class="input-group-field" type="text" ng-model="tag" disabled>
                     <div class="input-group-button">
-                        <button class="button" ng-click="addTag()">Add Tag</button>
+                        <button class="button disabled" ng-click="addTag()">Add Tag</button>
                     </div>
                 </div>
 
