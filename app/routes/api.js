@@ -129,13 +129,13 @@ module.exports = function (app, multer, ExifImage) {
                 if(err)
                     res.send(err);
 
-                for(var i = 0; i < req.body.tags.length; i++) {
-                    Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i].toLowerCase()},
-                        {upsert: true, new: true, setDefaultsOnInsert: true},
-                        function (error, result) {
-                            if (error) return;
+                // for(var i = 0; i < req.body.tags.length; i++) {
+                //     Tag.findOneAndUpdate({name: req.body.tags[i]}, {name: req.body.tags[i].toLowerCase()},
+                //         {upsert: true, new: true, setDefaultsOnInsert: true},
+                //         function (error, result) {
+                //             if (error) return;
 
-                            photo.tags.push(result._id);
+                            // photo.tags.push(result._id);
 
                             photo.name = req.body.name;
                             photo.price = req.body.price;
@@ -146,8 +146,8 @@ module.exports = function (app, multer, ExifImage) {
 
                                 // res.json({message: 'photo updated'});
                             });
-                        });
-                }
+                        // });
+                // }
             });
     });
 
